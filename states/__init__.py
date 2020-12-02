@@ -1,1 +1,1 @@
-from .test import Test
+from .quiz import Quiz

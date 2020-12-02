@@ -1,14 +1,12 @@
-from utils.notify_admins import on_startup_notify
-
-await on_startup_notify(dp)
-
-
 async def on_startup(dp):
     import filters
     import middlewares
     # Установка фильтров и мидлваров
     filters.setup(dp)
     middlewares.setup(dp)
+
+    from utils.notify_admins import on_startup_notify
+    await on_startup_notify(dp)
 
 
 if __name__ == '__main__':
