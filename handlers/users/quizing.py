@@ -29,6 +29,7 @@ async def answer_q1(message: types.Message, state: FSMContext):
     await message.answer("Вопрос№2"
                          "В какой части города вы сейчас находитесь?\n"
                          )
+
     await Quiz.Q2.set()
 
 
