@@ -10,8 +10,8 @@ from states import Quiz
 @dp.message_handler(Command("quiz"))
 async def enter_test(message: types.Message):
     await message.answer("Вы начали Викторину.\n"
-                         "Вопрос №1"
-                         "Сколько лет этому строению?"
+                         "Вопрос №1\n"
+                         "Откуда вы приеахли?\n"
                          )
     await Quiz.Q1.set()
 
@@ -27,7 +27,7 @@ async def answer_q1(message: types.Message, state: FSMContext):
     )
 
     await message.answer("Вопрос№2"
-                         "Сколько лет данной церкви?"
+                         "В какой части города вы сейчас находитесь?\n"
                          )
     await Quiz.Q2.set()
 
