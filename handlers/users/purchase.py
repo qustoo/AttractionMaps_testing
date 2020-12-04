@@ -1,11 +1,11 @@
 from aiogram import types
 
-from aiogram.contrib.middlewares import logging
+import logging
 from aiogram.dispatcher.filters import Command
 from aiogram.types import CallbackQuery
 
 from keyboards.inline.callback_datas import buy_callback
-from keyboards.inline.choice_buttons import choice,pear_keyboard_terrain
+from keyboards.inline.choice_buttons import choice, pear_keyboard_terrain, pear_keyboard_route
 from loader import dp
 
 
@@ -20,12 +20,14 @@ async def show_items(message: types.Message):
 @dp.callback_query_handler(buy_callback.filter(item_name="terrain_map"))
 async def buying_terrain_map(call: CallbackQuery):
     await call.answer(cache_time=60)
-    #logging.info(f"callback_data := {call.data}")
+    # Логирование
+    # logging.info(f"callback_data := {call.data}")
     await call.message.answer(f"Вы выбрали купить карту местности!\n",reply_markup=pear_keyboard_terrain)
 
 
 @dp.callback_query_handler(buy_callback.filter(item_name="route_map"))
-async def buying_terrain_map(call: CallbackQuery):
+async def buying_route_map(call: CallbackQuery):
     await call.answer(cache_time=60)
-    #logging.info(f"callback_data := {call.data}")
-    await call.message.answer(f"Вы выбрали купить карту маршрутов!\n",reply_markup=pear_keyboard_terrain)
+    # Логирование
+    # logging.info(f"callback_data := {call.data}")
+    await call.message.answer(f"Вы выбрали купить карту маршрутов!\n",reply_markup=pear_keyboard_route)
