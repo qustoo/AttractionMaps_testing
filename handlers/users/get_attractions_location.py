@@ -13,6 +13,7 @@ async def show_on_map(message: types.Message):
         "нажав на кнопку ниже",
         reply_markup=locations_for_button.keyboard,
 
+
     )
 
 
