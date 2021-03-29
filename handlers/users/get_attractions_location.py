@@ -1,5 +1,7 @@
 from aiogram import types
 from aiogram.dispatcher.filters import Command
+from aiogram.types import ReplyKeyboardRemove
+
 from keyboards.default import locations_for_button
 from loader import dp
 from utils.misc.calc_for_distance import choose_nearest
@@ -12,7 +14,6 @@ async def show_on_map(message: types.Message):
         f"Чтобы показать ближайшую достопримечательность,отправьте нам свое местоположение"
         "нажав на кнопку ниже",
         reply_markup=locations_for_button.keyboard,
-
 
     )
 
@@ -38,8 +39,8 @@ async def go_to_local(message: types.Message):
                          f"Широта: {latitude}\n"
                          f"Долгота:{longitude}\n\n"
                          "Ближайшее к вам будет:"
-                         f"{new_text}",
-                         disable_web_page_preview=True
+                         f"{new_text}",  # Добавил replykeyboardremove
+                         disable_web_page_preview=True, reply_markup=ReplyKeyboardRemove()
                          )
     for atract_name, url, distance, atract_local in atract_nearest:
         await message.answer_location(

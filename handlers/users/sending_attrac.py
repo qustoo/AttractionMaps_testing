@@ -18,7 +18,7 @@ async def find_id_video(message: Message):
 async def send_atr(message: Message):
     url1 = "https://gos.ifrigate.ru/wp-content/uploads/main2.jpg"
     await bot.send_photo(chat_id=message.from_user.id,
-                         photo=url1, caption="Администрация,если хочешь больше фото то нажми /more_attractions")
+                         photo=url1, caption=f"Администрация!/n" + f"Если хочешь больше фото, то нажми /more_attractions")
 
 
 @dp.message_handler(Command("more_attractions"))

@@ -1,48 +1,50 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from .callback_datas import buy_callback
 
-choice = InlineKeyboardMarkup(row_width=2,
-                              inline_keyboard=[
-                                  [
-                                      InlineKeyboardButton(
-                                          text="Купить \nкарту местности: ",
-                                          callback_data=buy_callback.new(item_name="terrain_map", quantity=2
-                                                                         )
-                                      ),
-                                      InlineKeyboardButton(
-                                          text="Купить \nкарту маршрутов: ",
-                                          callback_data=buy_callback.new(item_name="route_map", quantity=3
-                                                                         )
+choice = InlineKeyboardMarkup(
+    # 2 кнопки в сообщение
+    row_width=2, inline_keyboard=
+    [
+        [
+            InlineKeyboardButton
+                (
+                text="Карты метности:",
+                callback_data=buy_callback.new(item_name="terrain_map", skale=5000)
+            ),
+            InlineKeyboardButton
+                (
+                text="Карты маршрута:",
+                callback_data=buy_callback.new(item_name="route_map", skale=1000)
+            )
+        ],
+        [
+            InlineKeyboardButton
+                (
+                text="Отмена",
+                callback_data="cancel"
+            )
 
-                                      )
-                                  ],
-                                  [
-                                      InlineKeyboardButton(
-                                          text="Отмена",
-                                          callback_data="cancel"
-                                      )
-
-                                  ],
-                              ]
-                              )
-# url на карту местности
+        ],
+    ]
+)
+# создаем клавы
 pear_keyboard_terrain = InlineKeyboardMarkup()
 
-Map_Link_terrain = "https://img.tourister.ru/files/3/0/0/8/2/5/1/original.gif"
+# url на карту местности
+TERRAIN_MAP_LINK = "https://img.tourister.ru/files/3/0/0/8/2/5/1/original.gif"
 
-map_link_terrain = InlineKeyboardButton(text="Ссылка на товар: ", url=Map_Link_terrain)
+terrain_map_keyboard = InlineKeyboardButton(text="Открыть карту: ", url=TERRAIN_MAP_LINK)
 
-pear_keyboard_terrain.insert(map_link_terrain)
+# вставляем кнопки в клаву
+pear_keyboard_terrain.insert(terrain_map_keyboard)
 
-
-# url на карту маршрутов
+# создаем клавы
 pear_keyboard_route = InlineKeyboardMarkup()
 
-Map_link_route = "https://regnum.ru/uploads/pictures/news/2016/10/12/regnum_picture_1476263204584409_normal.jpg"
+# url на карту маршрутов
+ROUTE_MAP_LINK = "https://regnum.ru/uploads/pictures/news/2016/10/12/regnum_picture_1476263204584409_normal.jpg"
 
+route_map_link = InlineKeyboardButton(text="Открыть карту: ", url=ROUTE_MAP_LINK)
 
-map_link_route = InlineKeyboardButton(text="Ссылка на товар: ", url=Map_link_route)
-
-pear_keyboard_route.insert(map_link_route)
-
-
+# вставляем кнопки в клаву
+pear_keyboard_route.insert(route_map_link)
