@@ -4,7 +4,7 @@ from loader import dp
 
 # Декоратор
 # Сюда летят только текстовые сообщения
-@dp.message_handler(content_types= types.ContentType.TEXT)
+@dp.message_handler(content_types=types.ContentType.TEXT)
 async def bot_echo(message: types.Message):
     # Получил чат айди и текст сообщения
     chat_id = message.chat.id
