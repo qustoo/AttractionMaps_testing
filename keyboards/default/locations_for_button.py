@@ -1,9 +1,11 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
+# получаем локацию
 keyboard = ReplyKeyboardMarkup(
     keyboard=[
         [
-            KeyboardButton(text="Local", request_location=True)
+            # запрашиваем локацию у пользователя
+            KeyboardButton(text="🌐", request_location=True)
         ]
 
     ],
