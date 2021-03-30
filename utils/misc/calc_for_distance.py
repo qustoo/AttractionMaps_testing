@@ -5,11 +5,11 @@ from aiogram import types
 
 from data.locations import Attractions
 
-# Радиус
+# Радиус земли
 R = 6378.1
 
 
-def cal_distance(lat1, lon1, lat2, lon2):
+def calc_distance(lat1, lon1, lat2, lon2):
     # Преобразовываем
     lat1 = math.radians(lat1)
     lon1 = math.radians(lon1)
@@ -31,11 +31,14 @@ def cal_distance(lat1, lon1, lat2, lon2):
 
 
 def choose_nearest(location: types.Location):
-    distance = list()
-    for attract_name, attract_local in Attractions:
-        distance.append((attract_name,
-                         cal_distance(location.latitude, location.longitude, attract_local["lat"], attract_local["lon"]),
-                         show_on_gmaps.show(**attract_local),
-                         attract_local
-                         ))
-        return sorted(distance, key=lambda x: x[1])[:2]
+    distances = list()
+    for place_name, place_location in Attractions:
+        distances.append((place_name,
+                          calc_distance(location.latitude, location.longitude,
+                                        place_location["lat"],
+                                        place_location["lon"]),
+                          show_on_gmaps.show(**place_location),
+                          place_location
+                          ))
+        # забираем две ближайшие позиции по долготе и широте
+        return sorted(distances, key=lambda x: x[1])[:2]
