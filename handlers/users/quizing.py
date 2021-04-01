@@ -6,6 +6,7 @@ from aiogram import types
 
 from states import Quiz
 
+
 # пустое состояние
 @dp.message_handler(Command("quiz"), state=None)
 async def enter_test(message: types.Message):
