@@ -16,9 +16,9 @@ async def enter_easy_test(message: types.Message, state: FSMContext):
     rand = random.randint(0, (len(Easy_Array_Questions) - 1))
     if rand == 0:
         # вместо Node - передаем клаву для ответа, и так для каждого вопроса
-        await message.answer(text=f"Ответ на вопрос {rand}", reply_markup=menu.menu1.keyboard)
+        await message.answer(text=f"Ответ на вопрос {rand}", reply_markup=menu.menu1)
     elif rand == 1:
-        await message.answer(text=f"Ответ на вопрос {rand}", reply_markup=menu.menu2.keyboard)
+        await message.answer(text=f"Ответ на вопрос {rand}", reply_markup=menu.menu2)
         '''
     elif rand == 2:
         await message.answer(text=f"Ответ на вопрос {rand}")
