@@ -1,7 +1,7 @@
 import random
 
 from aiogram.dispatcher import FSMContext
-from aiogram.dispatcher.filters import Command
+from aiogram.dispatcher.filters import Command, Text
 
 from data.question_quizing_easy import Easy_Array_Questions
 from keyboards.default import menu
@@ -11,12 +11,23 @@ from aiogram import types
 from states.quiz_easy import QuizEasy
 
 
+@dp.message_handler(Command("quiz_easy1"))
+async def try_keyboard(messsage: types.Message):
+    await messsage.answer("Ответы:", reply_markup=menu.menu1)
+
+
+@dp.message_handler(Text("Ответ№1"))
+async def answer_q1(message: types.Message):
+    await message.answer('Ваш ответ = '
+                         f'{message.text}')
+
+
 @dp.message_handler(Command("quiz_easy"), state=None)
 async def enter_easy_test(message: types.Message, state: FSMContext):
     rand = random.randint(0, (len(Easy_Array_Questions) - 1))
     if rand == 0:
         # вместо Node - передаем клаву для ответа, и так для каждого вопроса
-        await message.answer(text=f"Ответ на вопрос {rand}", reply_markup=menu.menu1)
+        await message.answer(text=f"Ответ на вопрос {rand}", reply_markup=menu.menu1, state=None)
     elif rand == 1:
         await message.answer(text=f"Ответ на вопрос {rand}", reply_markup=menu.menu2)
         '''
@@ -33,4 +44,3 @@ async def enter_easy_test(message: types.Message, state: FSMContext):
         # QuizEasy.Q1.set()
         '''
         await state.finish()
-

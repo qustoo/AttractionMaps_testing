@@ -6,4 +6,4 @@ Easy_Array_Questions = [
     # "Вопрос 3",
     # Вопрос 4"
 ]
-print(Easy_Array_Questions[random.randint(0, (len(Easy_Array_Questions) - 1))])
+
