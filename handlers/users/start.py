@@ -15,4 +15,5 @@ from utils.misc import rate_limit
 @dp.message_handler(CommandStart())
 async def bot_start(message: types.Message):
     await message.answer(f'Здра!!!!вствуй, {message.from_user.full_name}! 😎😉'
-                         f'\nДля получения списка д!!!оступных коман!!д нажми /help')
+                         f'\nДля получения спис!!!ка д!!!оступных коман!!д нажми /help'
+                         f'dsgyhmwsdiopgnsdoigsd klgnsdopjigsdnpiou')
