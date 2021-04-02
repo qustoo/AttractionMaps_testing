@@ -4,7 +4,7 @@ from aiogram.dispatcher.filters.builtin import CommandStart
 from loader import dp, bot
 from utils.misc import rate_limit
 
-
+#12345
 # лимит на раз в 5 сек
 @rate_limit(limit=5)
 @dp.message_handler(CommandStart())
