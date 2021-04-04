@@ -17,5 +17,11 @@ def test():
     db.update_lon(1, 10)
     users = db.select_all_users()
     print(f"После обновления: {users=}")
+    db.add_user(2, "Alice", "alice@gensokyo.jp", -50.1, 20.5, 10)
+    users = db.select_all_users()
+    print(f"После добавления ещё одного пользователя: {users=}")
+    db.delete_user_by_id(1)
+    users = db.select_all_users()
+    print(f"После удаления пользователя: {users=}")
 
 test()
