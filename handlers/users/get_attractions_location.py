@@ -20,6 +20,13 @@ async def show_on_map(message: types.Message):
     )
 
 
+# Отказная
+@dp.message_handler(text="Отмена")
+async def quit_get_attract(message: types.Message):
+    await message.answer(f"Вы отказались от ближайшей достопримечательности!\n"
+                         "чтобы вернуться к списку команда нажмите /help", reply_markup=ReplyKeyboardRemove())
+
+
 # получили уже локацию
 @dp.message_handler(content_types=types.ContentType.LOCATION)
 async def get_location(message: types.Message):
@@ -28,19 +35,18 @@ async def get_location(message: types.Message):
     longitude = location.longitude
     closes_places = choose_nearest(location)
 
-    text_format = "Название: {place_name}. <a href='{url}'>Google</a>\n Расстояние до него: {distance:.1f} км"
+    text_format = "{place_name}.\n" \
+                  "Маршрут: <a href='{url}'>Google</a>\n" \
+                  "Расстояние до объекта: {distance:.2f} км"
     text = "\n\n".join(
         [
             text_format.format(place_name=place_name, url=url, distance=distance)
             for place_name, distance, url, place_location in closes_places
         ]
     )
-    await message.answer(f"Cпасибо за ответ\n"
-                         "Коордитаны:\n"
-                         f"Широта: {latitude}\n"
-                         f"Долгота: {longitude}\n\n"
-                         f"Ближайшая к вам:"
-                         f"{text}",
+    await message.answer(f'Спасибо за отправку!\n'
+                         f'Ближайшая к вам:\n'
+                         f'{text}',
                          disable_web_page_preview=True, reply_markup=ReplyKeyboardRemove()
                          # Добавил reply_markup=ReplyKeyboardRemove(),
                          # т.е. убираем клаву после отправки геопозиции

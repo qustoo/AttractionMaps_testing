@@ -7,4 +7,3 @@ class QuizEasy(StatesGroup):
     Q3 = State()
     Q4 = State()
     Q5 = State()
-    Q6 = State()

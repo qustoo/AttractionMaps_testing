@@ -1,7 +1,9 @@
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Command
+from aiogram.types import ReplyKeyboardRemove
 
+from keyboards.default import menu_for_easy_quizing
 from loader import dp
 from states import Quiz
 
@@ -11,8 +13,8 @@ from states import Quiz
 async def enter_test(message: types.Message):
     await message.answer("Вы начали Викторину.\n"
                          "Вопрос №1\n"
-                         "Откуда вы приеахли?\n"
-                         )
+                         "Откуда вы приеахли?\n", reply_markup=menu_for_easy_quizing.menu_0)
+
     # Устанавливаем состояние чтобы бот понял ответ на 1 вопрос
     await Quiz.Q1.set()
 
@@ -34,8 +36,9 @@ async def answer_q1(message: types.Message, state: FSMContext):
     # await state.update_data(answer1=answer)
 
     await message.answer("Вопрос№2"
-                         "В какой части города вы сейчас находитесь?\n"
-                         )
+                         , reply_markup=ReplyKeyboardRemove())
+
+    await message.answer("В какой части города вы сейчас находитесь?\n", reply_markup=menu_for_easy_quizing.menu_1)
 
     # Устанавливаем состояние во второй вопрос
     await Quiz.Q2.set()
@@ -51,9 +54,9 @@ async def answer_q2(message: types.message, state: FSMContext):
             "answer_second": answer2
         }
     )
-    await message.answer("Вопрос№3"
-                         "Сколько вам лет?\n"
-                         )
+    await message.answer("Вопрос№3", reply_markup=ReplyKeyboardRemove())
+    await message.answer("Сколько вам лет?\n", reply_markup=menu_for_easy_quizing.menu_2)
+
     # Устанавливаем состояние во третий вопрос
     await Quiz.Q3.set()
 
@@ -70,7 +73,7 @@ async def answer_q3(message: types.Message, state: FSMContext):
     # текущий текст ответа(он же и ответ на второй вопрос), т.е. получаем ответ на q3
     answer3 = message.text
 
-    await message.answer("Спасибо за ответы")
+    await message.answer("Спасибо за ответы",reply_markup=ReplyKeyboardRemove())
     await message.answer(f"Ответ 1: {answer1}")
     await message.answer(F"Ответ 2: {answer2}")
     await message.answer(F"Ответ 3: {answer3}")

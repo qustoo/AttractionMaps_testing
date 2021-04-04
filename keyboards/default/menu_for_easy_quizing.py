@@ -16,7 +16,6 @@ menu_0 = ReplyKeyboardMarkup(
     ],
     # чтобы размер был нормальным, клава не занимала пол-экрана
     resize_keyboard=True)
-
 menu_1 = ReplyKeyboardMarkup(
     keyboard=[
         [
@@ -54,14 +53,14 @@ menu_2 = ReplyKeyboardMarkup(
 menu_3 = ReplyKeyboardMarkup(
     keyboard=[
         [
-            KeyboardButton(text="Ответ №1111")
+            KeyboardButton(text="Бульвар Дружбы")
         ],
         [
-            KeyboardButton(text="Ответ №2222")
+            KeyboardButton(text="Красная долина")
 
         ],
         [
-            KeyboardButton(text="Ответ №3333")
+            KeyboardButton(text="Аллея любви")
         ],
 
     ],
