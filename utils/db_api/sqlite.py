@@ -32,9 +32,9 @@ class Database:
         CREATE TABLE IF NOT EXISTS Users (
         id INT NOT NULL,
         name VARCHAR(255) NOT NULL,
+        email VARCHAR(255),
         lat DOUBLE,
         lon DOUBLE,
-        email VARCHAR(255),
         rating DOUBLE,
         PRIMARY KEY (id)
         );
@@ -59,24 +59,24 @@ class Database:
     def select_user(self, **kwargs):
         sql = "SELECT * FROM Users WHERE "
         sql, parameters = self.format_args(sql, kwargs)
-        self.execute(sql, parameters=parameters, fetchone=True)
+        return self.execute(sql, parameters=parameters, fetchone=True)
 
     def count_users(self):
-        return  self.execute("SELECT COUNT(*) FROM Users", fetchone=True)
+        return self.execute("SELECT COUNT(*) FROM Users", fetchone=True)
 
-    def update_email(self, email, id):
+    def update_email(self, id:int, email:str):
         sql = "UPDATE Users SET email=? WHERE id=?"
         return self.execute(sql, parameters=(email, id), commit=True)
 
-    def update_rating(self, rating: float):
+    def update_rating(self, id:int, rating: float):
         sql = "UPDATE Users SET rating=? WHERE id=?"
         return self.execute(sql, parameters=(rating, id), commit=True)
 
-    def update_lat(self, lat: float):
+    def update_lat(self, id:int, lat: float):
         sql = "UPDATE Users SET lat=? WHERE id=?"
         return self.execute(sql, parameters=(lat, id), commit=True)
 
-    def update_lon(self, lon: float):
+    def update_lon(self, id:int, lon: float):
         sql = "UPDATE Users SET lon=? WHERE id=?"
         return self.execute(sql, parameters=(lon, id), commit=True)
 
