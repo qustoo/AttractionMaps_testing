@@ -16,6 +16,6 @@ async def bot_help(message: types.Message):
         '/show_on_map_attractions - Показать ближайшую достопримечательность',
         '/items - Покупка различных карт',
         '/get_photo - Получить фотку достопримечательности'
-
     ]
+    # добавить энциклопедию и внутрь викторины поместить разные уровни сложности
     await message.answer('\n'.join(text))

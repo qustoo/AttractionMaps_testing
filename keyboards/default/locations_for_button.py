@@ -5,12 +5,14 @@ keyboard = ReplyKeyboardMarkup(
     keyboard=[
         [
             # запрашиваем локацию у пользователя
-            KeyboardButton(text="🌐", request_location=True)
+            KeyboardButton(text="Отправить свою локацию 🗺️", request_location=True)
+        ],
+        [
+            KeyboardButton(text="Отмена")
         ]
-
     ],
     resize_keyboard=True,
-
-    # one_time_keyboard=True
+    # одна кнопка в строке
+    row_width=1
 
 )
