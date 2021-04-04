@@ -1,3 +1,5 @@
+from random import randint
+
 Easy_Array_Questions = [
     "Храм святого Иоанна Воина является частью строящегося духовно-патриотического комплекса во имя великомученика … ?",
     "Центральное место выставки занимает?",
@@ -5,3 +7,5 @@ Easy_Array_Questions = [
     "Какое второе название парка..?",
     "Вопрос №5"
 ]
+# while True:
+#     print(Easy_Array_Questions[randint(0,len(Easy_Array_Questions)-1)])

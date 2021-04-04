@@ -1,6 +1,7 @@
-from  utils.db_api.sqlite import Database
+from utils.Database_User.sqlite import Database
 
 db = Database("test.db")
+
 
 def test():
     db.create_table_users()
@@ -23,5 +24,6 @@ def test():
     db.delete_user_by_id(1)
     users = db.select_all_users()
     print(f"После удаления пользователя: {users=}")
+
 
 test()

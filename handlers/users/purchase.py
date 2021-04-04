@@ -27,6 +27,7 @@ async def buying_terrain_map(call: CallbackQuery, callback_data: dict):
     # ScaleMap = callback_data.get("skale")
     await call.message.answer(f"Вы выбрали купить карту местности!\n".upper(),  # f"Масштаб 1 к {ScaleMap}",
                               reply_markup=pear_keyboard_terrain)
+    await call.message.edit_reply_markup(reply_markup=None)
 
 
 @dp.callback_query_handler(buy_callback.filter(item_name="route_map"))
@@ -40,6 +41,8 @@ async def buying_route_map(call: CallbackQuery, callback_data: dict):
     await call.message.answer(f"Вы выбрали купить карту маршрутов!\n".upper(),
                               # f"Масштаб 1 к {mapskale}",
                               reply_markup=pear_keyboard_route)
+    await call.message.edit_reply_markup(reply_markup=None)
+
 
 
 @dp.callback_query_handler(text="cancel")
