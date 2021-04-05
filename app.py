@@ -1,5 +1,5 @@
 from loader import db
-
+from loader import photo_db
 
 async def on_startup(dp):
     import filters
@@ -14,8 +14,12 @@ async def on_startup(dp):
         db.create_table_users()
     except Exception as error:
         print(f'Error = {error}')
+    try:
+        photo_db.create_table_photos()
+    except Exception as error:
+        print(f'Error = {error}')
     # Чистим таблицу
-    db.delete_all_users()
+    # db.delete_all_users()
     # печатаем пользователей бд
     print('Пользователи = ', db.select_all_users())
     # отправка сообщения админам
