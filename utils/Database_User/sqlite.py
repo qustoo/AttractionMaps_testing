@@ -102,6 +102,12 @@ class Database:
         sql = "UPDATE Users SET lon=? WHERE id=?"
         return self.execute(sql, parameters=(lon, id), commit=True)
 
+    def get_coordinates(self, id:int):
+        x = self.select_user(id=id)
+        lat = x[3]
+        lon = x[4]
+        return lat, lon
+
     def delete_all_users(self):
         # Удаляем всех
         self.execute("DELETE FROM Users WHERE True", commit=True)

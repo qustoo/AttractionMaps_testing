@@ -28,5 +28,7 @@ def test():
     db.add_user(2, "Alice", "alice@gensokyo.usa", 31, 60.5, 20)
     users = db.select_all_users()
     print(f"После попытки добавления пользователя: {users=}")
+    x, y = db.get_coordinates(2)
+    print(f"Lat: {x} Lon: {y}")
 
 test()
