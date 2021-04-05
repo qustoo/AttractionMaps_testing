@@ -115,6 +115,9 @@ class PhotoDatabase:
         sql = "DELETE FROM Photos WHERE filename=?"
         return self.execute(sql, parameters=tuple([filename]), commit=True)
 
+    def get_one_file_name(self, **kwargs):
+        return self.select_photo(**kwargs)[0]
+
 
 # логгирование результатов
 def logger(statement):

@@ -24,6 +24,7 @@ def test():
     db.delete_photo_by_filename("004.jpg")
     photos = db.select_all_photos()
     print(f"После удаления: {photos=}")
+    print(f"Имя файла Улица Советская: {db.get_one_file_name(name='Улица Советская')}")
 
 
 test()
