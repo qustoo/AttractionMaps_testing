@@ -24,6 +24,9 @@ def test():
     db.delete_user_by_id(1)
     users = db.select_all_users()
     print(f"После удаления пользователя: {users=}")
-
+    print(f"Попытка добавления того же пользователя:")
+    db.add_user(2, "Alice", "alice@gensokyo.usa", 31, 60.5, 20)
+    users = db.select_all_users()
+    print(f"После попытки добавления пользователя: {users=}")
 
 test()

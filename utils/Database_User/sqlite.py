@@ -62,7 +62,7 @@ class Database:
         self.execute(sql, commit=True)
 
     def add_user(self, id: int, name: str, email: str = None, lat: float = 0, lon: float = 0, rating: float = 0):
-        sql = "INSERT INTO Users(id, name, email, lat, lon, rating) VALUES(?, ?, ?, ?, ?, ?)"
+        sql = "INSERT OR IGNORE INTO Users(id, name, email, lat, lon, rating) VALUES(?, ?, ?, ?, ?, ?)"
         self.execute(sql, (id, name, email, lat, lon, rating), commit=True)
 
     def select_all_users(self):
