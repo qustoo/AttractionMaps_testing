@@ -61,6 +61,7 @@ then
 Description=AttractionMaps_testing
 
 [Service]
+WorkingDirectory='$PWD'
 ExecStart=python3 '$PWD'/app.py
 Restart=always
 User='$USER'
