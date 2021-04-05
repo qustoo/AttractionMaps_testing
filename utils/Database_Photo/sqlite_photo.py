@@ -82,6 +82,12 @@ class PhotoDatabase:
         sql, parameters = self.format_args(sql, kwargs)
         return self.execute(sql, parameters=parameters, fetchall=True)
 
+    def select_photo(self, **kwargs):
+        sql = "SELECT * FROM Photos WHERE "
+        # формируем запрос sql и формируем параметры из тьюпла
+        sql, parameters = self.format_args(sql, kwargs)
+        return self.execute(sql, parameters=parameters, fetchone=True)
+
     def count_photos(self):
         return self.execute("SELECT COUNT(*) FROM Photos", fetchone=True)
 
