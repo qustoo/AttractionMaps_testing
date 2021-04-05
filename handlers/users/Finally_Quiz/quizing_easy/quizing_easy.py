@@ -5,7 +5,7 @@ from aiogram.types import ReplyKeyboardRemove
 from quiz_all_files.Quiz_Questions.questions_quiz import Easy_Array_Questions
 from data.checking_answers import func_answer1, func_answer2, func_answer3, func_answer4
 from keyboards.default import menu_for_easy_quizing
-from loader import dp
+from loader import dp, photo_db
 from aiogram import types
 
 from states.quiz_easy import QuizEasy
@@ -15,7 +15,7 @@ from quiz_all_files.Quiz_Path_Photos.Easy_Path_Photos.path_to_photos_quizing_eas
 @dp.message_handler(Command("quiz_easy"), state=None)
 async def enter_easy_test(message: types.Message):
     # присылаем фотку и клаву
-    await message.answer_photo(photo=open(List_path_photos_quiz_easy[0], 'rb'))
+    await message.answer_photo(photo=open(photo_db.get_one_file_name(name='easy_question_1'), 'rb'))
     await message.answer(Easy_Array_Questions[0], reply_markup=menu_for_easy_quizing.menu_0)
     await QuizEasy.Q1.set()
 
@@ -30,7 +30,7 @@ async def answer_test_1(message: types.Message, state: FSMContext):
     await message.answer(text="Спасибо за ваш ответ!", reply_markup=ReplyKeyboardRemove())
 
     # отправляем новую фотку + вопрос + новую клаву
-    await message.answer_photo(photo=open(List_path_photos_quiz_easy[1], 'rb'))
+    await message.answer_photo(photo=open(photo_db.get_one_file_name(name='easy_question_2'), 'rb'))
     await message.answer(Easy_Array_Questions[1], reply_markup=menu_for_easy_quizing.menu_1)
 
     await QuizEasy.Q2.set()
@@ -46,7 +46,7 @@ async def answer_test_2(message: types.Message, state: FSMContext):
     await message.answer(text="Спасибо за ваш ответ!", reply_markup=ReplyKeyboardRemove())
 
     # отправляем новую фотку + вопрос + новую клаву
-    await message.answer_photo(photo=open(List_path_photos_quiz_easy[2], 'rb'))
+    await message.answer_photo(photo=open(photo_db.get_one_file_name(name='easy_question_3'), 'rb'))
     await message.answer(Easy_Array_Questions[2], reply_markup=menu_for_easy_quizing.menu_2)
 
     await QuizEasy.Q3.set()
@@ -63,7 +63,7 @@ async def answer_test_3(message: types.Message, state: FSMContext):
                          , reply_markup=ReplyKeyboardRemove())
 
     # отправляем новую фотку + вопрос + новую клаву
-    await message.answer_photo(photo=open(List_path_photos_quiz_easy[3], 'rb'))
+    await message.answer_photo(photo=open(photo_db.get_one_file_name(name='easy_question_4'), 'rb'))
     await message.answer(Easy_Array_Questions[3], reply_markup=menu_for_easy_quizing.menu_3)
 
     await QuizEasy.Q4.set()
