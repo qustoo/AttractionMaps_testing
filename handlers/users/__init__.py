@@ -1,5 +1,6 @@
 from .help import dp
 from .get_my_rating import dp
+from .pay_for_maps import dp
 from .get_attractions_location import dp
 from .sending_attrac import dp
 from .purchase import dp

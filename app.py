@@ -1,6 +1,7 @@
 from loader import db
 from loader import photo_db
 
+
 async def on_startup(dp):
     import filters
     import middlewares
