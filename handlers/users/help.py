@@ -18,7 +18,9 @@ async def bot_help(message: types.Message):
         '/get_photo - Получить фотку достопримечательности',
         '/get_my_rating - Узнать свой рейтинг в Викторине',
         '/save_my_location - Сохранить мою геолокацию',
-        '/buy_map - Покупка уникальной карты'
+        '/buy_map - Покупка уникальной карты',
+        '/reset_encyclopedia - Начать заново',
+        '/encyclopedia - Энциклопедия'
     ]
     # добавить энциклопедию и внутрь викторины поместить разные уровни сложности
     await message.answer('\n'.join(text))

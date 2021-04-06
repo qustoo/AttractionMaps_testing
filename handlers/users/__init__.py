@@ -5,6 +5,7 @@ from .save_first_time_location import dp
 from .get_attractions_location import dp
 from .sending_attrac import dp
 from .purchase import dp
+from handlers.users.encyclopedia_district.Soviet_District.encyclopedia_soviet import dp
 from handlers.users.Finally_Quiz.quizing_easy import dp
 from .quizing import dp
 from .start import dp

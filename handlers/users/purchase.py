@@ -2,13 +2,11 @@ from aiogram import types
 from aiogram.dispatcher.filters import Command
 from aiogram.types import CallbackQuery
 
-from encyclopedia_all_files.Encyclopedia_District.Soviet_region.photos import Sovet_photo1
-from encyclopedia_all_files.Encyclopedia_District.Soviet_region.text import Sovet_text
-from keyboards.inline.callback_datas import buy_callback, place_callback
+from keyboards.inline.callback_datas import buy_callback
 from keyboards.inline.choice_buttons import choice, pear_keyboard_terrain, pear_keyboard_route
-from keyboards.inline.encyclopedia import choice_p, place_keyboard
-from loader import dp, photo_db
-a=[]
+from loader import dp
+
+
 @dp.message_handler(Command("items"))
 async def show_items(message: types.Message):
     await message.answer(text=
@@ -52,57 +50,3 @@ async def cancel_buying_maps(call: CallbackQuery):
 
     # Отправляем пустую клавиатуру, т.е. выходит из клавиатуры
     await call.message.edit_reply_markup(reply_markup=None)
-
-
-
-
-@dp.message_handler(Command("reset_encyclopedia"))
-async def show_encyclopedia(message: types.Message):
-    a.clear()
-    await message.answer("Энциклопедия обновлена\n")
-
-@dp.message_handler(Command("encyclopedia"))
-async def show_encyclopedia(message: types.Message):
-    await message.answer(text=
-                         f"Выберите район\n"
-                         "Если передумали - нажмите отмена",
-                         # choice - клавиатура
-                         reply_markup=choice_p
-                         )
-
-@dp.callback_query_handler(text="cancel_place")
-async def cancel_encyclopedia(call: CallbackQuery):
-    await call.answer(text="Отмена", show_alert=True)
-
-    # Отправляем пустую клавиатуру, т.е. выходит из клавиатуры
-    await call.message.edit_reply_markup(reply_markup=None)
-
-@dp.callback_query_handler(place_callback.filter(item_name="sov_r"))
-async def sov_region(call: CallbackQuery, callback_data: dict):
-    await call.answer(cache_time=60)
-    await call.message.answer("Советский район\n", reply_markup=place_keyboard)
-
-
-@dp.callback_query_handler(place_callback.filter(item_name="1"))
-async def sov_1(call: CallbackQuery, callback_data: dict):
-    await call.answer(cache_time=60)
-    await call.message.answer(Sovet_photo1[len(a)])
-    await call.message.answer(text=Sovet_text[len(a)])
-
-
-@dp.callback_query_handler(place_callback.filter(item_name="2"))
-async def sov_2(call: CallbackQuery, callback_data: dict):
-    await call.answer(cache_time=60)
-
-    await call.message.answer("район\n")
-
-@dp.callback_query_handler(place_callback.filter(item_name="show_more"))
-async def show_more(call: CallbackQuery, callback_data: dict):
-    await call.answer(cache_time=60)
-    global a
-    if len(a)<len(Sovet_photo1):
-        a.append(0)
-        await call.message.answer("More...", reply_markup=place_keyboard)
-    else:
-        await call.message.answer("no more")
-
