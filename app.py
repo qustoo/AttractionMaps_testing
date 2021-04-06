@@ -1,28 +1,37 @@
+from db import do_db_photo
 from loader import db
 from loader import photo_db
+import filters
+import middlewares
+from utils.notify_admins import on_startup_notify
 
 
 async def on_startup(dp):
-    import filters
-    import middlewares
-    # Установка фильтров и мидлваров
+    # Установка фильтров и мидлварей
     filters.setup(dp)
     middlewares.setup(dp)
 
-    from utils.notify_admins import on_startup_notify
     # создаем бд юзера
     try:
         db.create_table_users()
     except Exception as error:
         print(f'Error = {error}')
+    # Чистим БД юзеров
+    # db.delete_all_users()
+
+    # создаем бд фотки
     try:
         photo_db.create_table_photos()
     except Exception as error:
         print(f'Error = {error}')
-    # Чистим таблицу
-    # db.delete_all_users()
-    # печатаем пользователей бд
+    # Чистим БД фоток
+    # photo_db.delete_all_photos()
+    do_db_photo(photo_db)
+    print('--------------')
     print('Пользователи = ', db.select_all_users())
+    print('--------------')
+    print('\nФоточки = ', photo_db.select_all_photos())
+    print('--------------')
     # отправка сообщения админам
     await on_startup_notify(dp)
 

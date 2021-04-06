@@ -11,6 +11,7 @@ bot = Bot(token=config.BOT_TOKEN, parse_mode=types.ParseMode.HTML)
 # Храним в оперативной памяти
 storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage)
-# Импортируем базу данных
+# Импортируем базу данных юзера
 db = Database()
+# Импортируем базу данных фоток
 photo_db = PhotoDatabase()

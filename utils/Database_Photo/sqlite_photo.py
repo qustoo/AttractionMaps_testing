@@ -61,7 +61,7 @@ class PhotoDatabase:
         self.execute(sql, commit=True)
 
     def add_photo(self, filename: str, name: str, region: str = None, lat: float = 0, lon: float = 0):
-        sql = "INSERT INTO Photos(filename, name, region, lat, lon) VALUES(?, ?, ?, ?, ?)"
+        sql = "INSERT OR IGNORE INTO Photos(filename, name, region, lat, lon) VALUES(?, ?, ?, ?, ?)"
         self.execute(sql, (filename, name, region, lat, lon), commit=True)
 
     def select_all_photos(self):
@@ -121,9 +121,11 @@ class PhotoDatabase:
 
 # логгирование результатов
 def logger(statement):
+    '''
     print(f"""
 _____
 Executing in second DB:
 {statement}
 -----
 """)
+'''

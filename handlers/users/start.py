@@ -1,8 +1,7 @@
 from aiogram import types
-# from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.builtin import CommandStart
 
-from loader import dp, bot, db
+from loader import dp, db
 from utils.misc import rate_limit
 
 
@@ -23,7 +22,6 @@ async def bot_start(message: types.Message):
     count_users_db = db.count_users()[0]
     await message.answer(f'В базе сейчас <b><i>{count_users_db}</i></b> пользователей')
     # await state.set_state("locale_lat_lon_db")
-
 
 # @dp.message_handler(content_types=types.ContentTypes.LOCATION,state="locale_lat_lon_db")
 # async def locale_dp(message: types.Message,state: FSMContext):
