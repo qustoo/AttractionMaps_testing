@@ -11,5 +11,5 @@ Proletarian_photo4 = [
     "encyclopedia_proletarian_guestion_4"
 ]
 Proletarian_photo5 = [
-
+    "encyclopedia_proletarian_guestion_5"
 ]
