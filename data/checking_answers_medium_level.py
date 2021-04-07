@@ -122,6 +122,9 @@ async def check_answer_medium_10(message: types.Message, str_ans10):
 
 
 async def check_answer_medium_11(message: types.Message, str_ans11):
+    await message.answer("Вопрос 11: Правильный ответ!")
+    RATE = db.select_user(id=message.from_user.id)[-1]
+    '''
     result = re.match(List_Of_Pattern_regex[10], str_ans11, re.IGNORECASE)
     if result is not None:
         await message.answer("Вопрос 11: Правильный ответ!")
@@ -129,6 +132,7 @@ async def check_answer_medium_11(message: types.Message, str_ans11):
         db.update_rating(id=message.from_user.id, rating=RATE + 3.0)
     else:
         await message.answer("Вопрос 11: Неправильный ответ!")
+    '''
 
 
 async def check_answer_medium_12(message: types.Message, str_ans12):

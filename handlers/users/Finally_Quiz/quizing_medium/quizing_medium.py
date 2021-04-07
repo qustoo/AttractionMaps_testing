@@ -170,7 +170,7 @@ async def answer_test_1(message: types.Message, state: FSMContext):
 
     # отправляем новую фотку + вопрос
     await message.answer_photo(photo=open(photo_db.get_one_file_name(name='medium_question_13'), 'rb'))
-    await message.answer("Вопрос 12:\n" + Medium_Array_Questions[12])
+    await message.answer("Вопрос 13:\n" + Medium_Array_Questions[12])
 
     await QuizMedium.Q13.set()
 
