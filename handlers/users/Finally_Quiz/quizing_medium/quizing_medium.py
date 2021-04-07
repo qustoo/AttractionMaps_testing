@@ -3,7 +3,8 @@ from aiogram.dispatcher.filters import Command
 
 from data.checking_answers_medium_level import check_answer_medium_1, check_answer_medium_2, check_answer_medium_3, \
     check_answer_medium_4, check_answer_medium_5, check_answer_medium_6, check_answer_medium_7, check_answer_medium_8, \
-    check_answer_medium_9, check_answer_medium_10, check_answer_medium_11
+    check_answer_medium_9, check_answer_medium_10, check_answer_medium_11, check_answer_medium_12, \
+    check_answer_medium_13
 from quiz_all_files.Quiz_Questions.questions_quiz import Medium_Array_Questions
 from loader import dp, photo_db
 from aiogram import types
@@ -191,8 +192,8 @@ async def answer_test_1(message: types.Message, state: FSMContext):
     answer9 = data.get("answer9")
     answer10 = data.get("answer10")
     answer11 = data.get("answer11")
-    answer12 = message.text
-
+    answer12 = data.get("answer12")
+    answer13 = message.text
     await check_answer_medium_1(message, answer1)
     await check_answer_medium_2(message, answer2)
     await check_answer_medium_3(message, answer3)
@@ -204,4 +205,6 @@ async def answer_test_1(message: types.Message, state: FSMContext):
     await check_answer_medium_9(message, answer9)
     await check_answer_medium_10(message, answer10)
     await check_answer_medium_11(message, answer11)
+    await check_answer_medium_12(message, answer12)
+    await check_answer_medium_13(message, answer13)
     await state.finish()
