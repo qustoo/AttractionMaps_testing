@@ -59,7 +59,7 @@ async def create_invoice(call: CallbackQuery, state: FSMContext):
 
 @dp.callback_query_handler(text="cancel", state="qiwi")
 async def cancel_payment(call: CallbackQuery, state: FSMContext):
-    await call.answer("Отменено",show_alert=True)
+    await call.answer("Отменено", show_alert=True)
     await state.finish()
 
 
@@ -77,5 +77,9 @@ async def cancel_payment(call: CallbackQuery, state: FSMContext):
         return
     else:
         await call.message.answer("Все успешно оплачено!")
+        await call.message.answer_document(types.InputFile("data/Rostov-na-donu.png"),
+                                           caption="Вот ваша секретная покупка!")
     await call.message.delete_reply_markup()
     await state.finish()
+
+

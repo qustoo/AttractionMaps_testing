@@ -17,7 +17,7 @@ async def on_startup(dp):
     except Exception as error:
         print(f'Error = {error}')
     # Чистим БД юзеров
-    # db.delete_all_users()
+    #  db.delete_all_users()
 
     # создаем бд фотки
     try:
@@ -26,12 +26,11 @@ async def on_startup(dp):
         print(f'Error = {error}')
     # Чистим БД фоток
     # photo_db.delete_all_photos()
-    do_db_photo(photo_db)
-    print('--------------')
-    print('Пользователи = ', db.select_all_users())
+    # вносим изначально в бд фотки
+    # do_db_photo(photo_db)
+    print('\nПользователи = ', db.select_all_users())
     print('--------------')
     print('\nФоточки = ', photo_db.select_all_photos())
-    print('--------------')
     # отправка сообщения админам
     await on_startup_notify(dp)
 
