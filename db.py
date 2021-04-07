@@ -276,7 +276,7 @@ def do_db_photo(data_base_photo):
         'encyclopedia_voroshilovsky_guestion_6')
 
     return
-    return
+
 
 # photos = photo_db.select_all_photos();
 # print(f"БД: {photos=}")
