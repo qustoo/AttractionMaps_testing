@@ -167,6 +167,21 @@ def do_db_photo(data_base_photo):
     data_base_photo.add_photo(
         r'encyclopedia_all_files/Encyclopedia_District/Proletarian_region/Photo/encyclopedia_proletarian_guestion_5.jpg',
         'encyclopedia_proletarian_guestion_5')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Proletarian_region/Photo/encyclopedia_proletarian_guestion_6.jpg',
+        'encyclopedia_proletarian_guestion_6')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Proletarian_region/Photo/encyclopedia_proletarian_guestion_7.jpg',
+        'encyclopedia_proletarian_guestion_7')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Proletarian_region/Photo/encyclopedia_proletarian_guestion_8.jpg',
+        'encyclopedia_proletarian_guestion_8')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Proletarian_region/Photo/encyclopedia_proletarian_guestion_9.jpg',
+        'encyclopedia_proletarian_guestion_9')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Proletarian_region/Photo/encyclopedia_proletarian_guestion_10.jpg',
+        'encyclopedia_proletarian_guestion_10')
 
     #железнодорожный район
     data_base_photo.add_photo(
