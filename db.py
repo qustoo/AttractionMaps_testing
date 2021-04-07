@@ -118,6 +118,9 @@ def do_db_photo(data_base_photo):
     data_base_photo.add_photo(
         r'encyclopedia_all_files/Encyclopedia_District/MayDay_region/Photos/encyclopedia_mayday_guestion_9.jpg',
         'encyclopedia_mayday_guestion_9')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/MayDay_region/Photos/encyclopedia_mayday_guestion_10.jpg',
+        'encyclopedia_mayday_guestion_10')
 
     #октябрьский район
     data_base_photo.add_photo(

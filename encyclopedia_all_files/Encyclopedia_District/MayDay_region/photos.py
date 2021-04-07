@@ -12,5 +12,5 @@ MayDay_photo4 = [
     "encyclopedia_mayday_guestion_4","encyclopedia_mayday_guestion_9"
 ]
 MayDay_photo5 = [
-    "encyclopedia_mayday_guestion_5"
+    "encyclopedia_mayday_guestion_5","encyclopedia_mayday_guestion_10"
 ]
