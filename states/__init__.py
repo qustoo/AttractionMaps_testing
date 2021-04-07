@@ -1,2 +1,2 @@
-from .quiz_easy import QuizEasy
-from .quiz import Quiz
+from .MachineStates_For_Quiz import QuizEasy
+

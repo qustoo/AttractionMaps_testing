@@ -11,10 +11,14 @@ from utils.misc import rate_limit
 async def bot_start(message: types.Message):
     await message.answer(f'Здравствуйте, {message.from_user.full_name}! 😎😉1️⃣'
                          f'\nДля получения списка доступных команд нажми /help')
+    # await message.answer_document(types.InputFile("data/Rostov-na-donu.png"), caption="Вот ваша секретная покупка!")
+    # если хотим обнулять рейтинг человека, расскомментировать нижестоящую строчку
+    # db.update_rating(id=message.from_user.id, rating=0.0)
 
     # если Бд уже есть, печатаем ошибку
     try:
-        db.add_user(id=message.from_user.id, name=message.from_user.full_name)
+        db.add_user(id=message.from_user.id, name=message.from_user.full_name, rating=0.0)
+
     except Exception as error:
         print(error)
 

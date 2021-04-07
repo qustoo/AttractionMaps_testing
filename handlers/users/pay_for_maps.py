@@ -1,12 +1,14 @@
+from random import randint
+
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Command
-from aiogram.types import CallbackQuery
+from aiogram.types import CallbackQuery, ReplyKeyboardRemove
 from aiogram.utils.markdown import hlink, hcode
 
 from data.Maps import Maps
 from data.config import WALLET_QIWI
-from keyboards.inline.purchase_maps import buy_keyboard, paid_keyboard
+from keyboards.inline.purchase_maps import buy_keyboard, paid_keyboard, Choose_finally_map
 from loader import dp
 from utils.misc.qiwi import PaymentForQiwi, NoPaymentFound, NotEnoughMoney
 
@@ -77,9 +79,13 @@ async def cancel_payment(call: CallbackQuery, state: FSMContext):
         return
     else:
         await call.message.answer("Все успешно оплачено!")
-        await call.message.answer_document(types.InputFile("data/Rostov-na-donu.png"),
-                                           caption="Вот ваша секретная покупка!")
+        rand_item = randint(1, 2)
+        if rand_item == 1:
+            await call.message.answer_document(types.InputFile("data/Rostov-na-donu.png"),
+                                               caption="Вот ваша секретная покупка!")
+        else:
+            await call.message.answer_document(types.InputFile("data/Rostov-na-donu_1.png"),
+                                               caption="Вот ваша секретная покупка!")
+        await state.set_state("choose a product")
     await call.message.delete_reply_markup()
     await state.finish()
-
-

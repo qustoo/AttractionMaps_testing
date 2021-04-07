@@ -9,7 +9,7 @@ from keyboards.default import menu_for_easy_quizing
 from loader import dp, photo_db
 from aiogram import types
 
-from states.quiz_easy import QuizEasy
+from states.MachineStates_For_Quiz import QuizEasy
 
 
 @dp.message_handler(Command("quiz_easy"), state=None)

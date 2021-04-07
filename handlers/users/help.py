@@ -9,18 +9,17 @@ from utils.misc import rate_limit
 @rate_limit(5, 'help')
 @dp.message_handler(CommandHelp())
 async def bot_help(message: types.Message):
+    # '/items - Покупка различных карт',
     text = [
         'Список команд: ',
-        '/quiz - Начать викторину(в тестовом режиме)',
-        '/quiz_easy - Начать викторину в легком режиме',
-        '/show_on_map_attractions - Показать ближайшую достопримечательность',
-        '/items - Покупка различных карт',
-        '/get_photo - Получить фотку достопримечательности',
-        '/get_my_rating - Узнать свой рейтинг в Викторине',
+        '/quiz_easy - Начать викторину на легком уровне сложности',
+        '/quiz_medium - Начать викторину на среднем уровне сложности',
+        '/encyclopedia - Энциклопедия',
+        '/show_on_map_attractions - Показать ближайшую достопримечательность, и построить паутину маршрута',
+        '/get_my_rating - Узнать свой рейтинг в викторине',
         '/save_my_location - Сохранить мою геолокацию',
-        '/buy_map - Покупка уникальной карты',
-        '/reset_encyclopedia - Начать заново',
-        '/encyclopedia - Энциклопедия'
+        '/get_photo - Получить фотку достопримечательности',
+        '/reset_encyclopedia - Начать энциклопедию сначала '
     ]
     # добавить энциклопедию и внутрь викторины поместить разные уровни сложности
     await message.answer('\n'.join(text))
