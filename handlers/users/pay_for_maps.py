@@ -8,7 +8,7 @@ from aiogram.utils.markdown import hlink, hcode
 
 from data.Maps import Maps
 from data.config import WALLET_QIWI
-from keyboards.inline.purchase_maps import buy_keyboard, paid_keyboard, Choose_finally_map
+from keyboards.inline.purchase_maps import buy_keyboard, paid_keyboard
 from loader import dp
 from utils.misc.qiwi import PaymentForQiwi, NoPaymentFound, NotEnoughMoney
 
