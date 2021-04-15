@@ -17,7 +17,7 @@ async def on_startup(dp):
     except Exception as error:
         print(f'Error = {error}')
     # Чистим БД юзеров
-    #  db.delete_all_users()
+    # db.delete_all_users()
 
     # создаем бд фотки
     try:
