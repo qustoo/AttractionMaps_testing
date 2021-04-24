@@ -74,7 +74,7 @@ echo  'Change PostgreSQL user? (y/n) Current user is' "$PGUSER"
 read change
 if [[ "$change" == y* ]]
 then
-  echo "Enter new PostgreSQL's user"
+  echo "Enter new PostgreSQL's user:"
   read PGUSER
   echo "PostgreSQL's user changed successfully"
 fi
@@ -83,7 +83,7 @@ echo  'Change PostgreSQL password? (y/n) Current user is' "$PGPASSWORD"
 read change
 if [[ "$change" == y* ]]
 then
-  echo "Enter new PostgreSQL's password"
+  echo "Enter new PostgreSQL's password:"
   read PGPASSWORD
   echo "PostgreSQL's password changed successfully"
 fi
