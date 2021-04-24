@@ -5,8 +5,8 @@ db = Database(asyncio.get_event_loop())
 
 
 async def test():
-    await db.delete_all_users()
     await db.create_table_users()
+    await db.delete_all_users()
     users = await db.select_all_users()
     print(f"До добавления: {users=}")
     await db.add_user(1, "Vasya")
