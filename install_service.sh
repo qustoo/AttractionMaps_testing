@@ -98,7 +98,9 @@ BOT_TOKEN='$BOT_TOKEN'
 ip='$ip'
 qiwi='$qiwi'
 qiwi_public_key='$qiwi_public_key'
-wallet='$wallet
+wallet='$wallet'
+PGUSER='$PGUSER'
+PGPASSWORD='$PGPASSWORD
 } > ./.env
 
 
