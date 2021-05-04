@@ -25,9 +25,9 @@ async def on_startup(dp):
     except Exception as error:
         print(f'Error = {error}')
     # Чистим БД фоток
-    # photo_db.delete_all_photos()
+    photo_db.delete_all_photos()
     # вносим изначально в бд фотки
-    # do_db_photo(photo_db)
+    do_db_photo(photo_db)
     print('\nПользователи = ', db.select_all_users())
     print('--------------')
     print('\nФоточки = ', photo_db.select_all_photos())
