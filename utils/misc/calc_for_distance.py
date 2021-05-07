@@ -3,7 +3,7 @@ import math
 from utils.misc import show_on_gmaps
 from aiogram import types
 
-from data.locations import Attractions, find_locale
+from data.locations import Attractions
 
 # Радиус земли
 R = 6378.1
@@ -11,6 +11,25 @@ R = 6378.1
 New_Attract = Attractions.copy()
 
 
+# Функция сброса карты
+def SetTrueForAllAttractions(List_Attractions):
+    index = 0
+    for i in List_Attractions:
+        List_Attractions[index] = (
+            List_Attractions[index][0], {'lat': List_Attractions[index][1]['lat'],
+                                         'lon': List_Attractions[index][1]['lon'],
+                                         'bypass': True})
+        index += 1
+
+
+# поиск индекса объекта в листе словарей
+def find_locale(name_object, Attract_List):
+    for i in range(0, len(Attract_List)):
+        if name_object == Attract_List[i][0]:
+            return i
+
+
+# вычисляем расстояние
 def calc_distance(lat1, lon1, lat2, lon2):
     # Преобразовываем
     lat1 = math.radians(lat1)
@@ -32,30 +51,37 @@ def calc_distance(lat1, lon1, lat2, lon2):
     return distance
 
 
-def choose_nearest(message: types.Message, latt, lonn, List_Attractions):
+def choose_nearest(lat, lon, List_Attractions):
     distances = list()
     for place_name, place_location in List_Attractions:
-        distances.append((place_name,
-                          calc_distance(latt, lonn,
-                                        place_location["lat"],
-                                        place_location["lon"]),
-                          show_on_gmaps.show(**place_location),
-                          place_location
-                          ))
-    # забираем две ближайшие позиции по долготе и широте
+        # Если обход по локации True
+        if place_location['bypass']:
+            distances.append((place_name,
+                              calc_distance(lat, lon,
+                                            place_location["lat"],
+                                            place_location["lon"]),
+                              show_on_gmaps.show(place_location['lat'], place_location['lon']),
+                              place_location
+                              ))
+
+    # формируем список, в которым лежит: (название_объекта, расстояние_до_него, ссылка на гугл_карту, {координаты, обход})
     res_lis = sorted(distances, key=lambda x: x[1])[0:1]
+    # print('собранный список ', res_lis)
 
-    # передаем имя и список в функцию, получаем нужный индекс
+    # если флаг прохода = True, меняем его на false в Attractions и в res_lis
     try:
-        index = find_locale(res_lis[0][0], Attract_List=New_Attract)
-        print('attraction index = ', index)
-        New_Attract.remove(New_Attract[index])
-        print('After delete = ', New_Attract)
-    except IndexError as index_error:
-        print('Ошибка = ', index_error)
+        name_of_found_place = res_lis[0][0]
+        index = find_locale(name_of_found_place, Attract_List=List_Attractions)
+        # print('индекс локации ', List_Attractions[index][-1])
+        if List_Attractions[index][-1].get('bypass'):
+            List_Attractions[index] = (List_Attractions[index][0], {'lat': List_Attractions[index][1]['lat'],
+                                                                    'lon': List_Attractions[index][1]['lon'],
+                                                                    'bypass': False})
+            # устанавливаем, что мы прошли этот объект
+            res_lis[-1][-1]['bypass'] = False
+            # print('test_Attractions after false =', List_Attractions)
+    # ловим ошибку пустого листа, когда все объекты пройдены
+    except Exception as err:
+        print(err)
 
-    # печатаем список
-    print('Список мест=', New_Attract, "\n")
-
-    # возвращаем нужный список
     return res_lis
