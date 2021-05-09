@@ -1,5 +1,4 @@
-import math
-
+import math, re
 from utils.misc import show_on_gmaps
 from aiogram import types
 
@@ -51,11 +50,11 @@ def calc_distance(lat1, lon1, lat2, lon2):
     return distance
 
 
-def choose_nearest(lat, lon, List_Attractions):
+def choose_nearest(lat, lon, List_Attractions, name_object):
     distances = list()
     for place_name, place_location in List_Attractions:
         # Если обход по локации True
-        if place_location['bypass']:
+        if place_location['bypass'] and re.search(name_object, place_name, re.IGNORECASE) is not None:
             distances.append((place_name,
                               calc_distance(lat, lon,
                                             place_location["lat"],
