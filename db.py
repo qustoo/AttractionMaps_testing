@@ -24,6 +24,22 @@ def do_db_photo(data_base_photo):
     data_base_photo.add_photo(r'quiz_all_files/Quiz_Photos/Medium_Photos/medium_question_11.jpg', "medium_question_11")
     data_base_photo.add_photo(r'quiz_all_files/Quiz_Photos/Medium_Photos/medium_question_12.jpg', "medium_question_12")
     data_base_photo.add_photo(r'quiz_all_files/Quiz_Photos/Medium_Photos/medium_question_13.jpg', "medium_question_13")
+    # тяжелый уровень
+    data_base_photo.add_photo(r'quiz_all_files/Quiz_Photos/Hard_Photos/hard_question_1.jpg', "hard_question_1")
+    data_base_photo.add_photo(r'quiz_all_files/Quiz_Photos/Hard_Photos/hard_question_2.jpg', "hard_question_2")
+    data_base_photo.add_photo(r'quiz_all_files/Quiz_Photos/Hard_Photos/hard_question_3.jpg', "hard_question_3")
+    data_base_photo.add_photo(r'quiz_all_files/Quiz_Photos/Hard_Photos/hard_question_4.jpg', "hard_question_4")
+    data_base_photo.add_photo(r'quiz_all_files/Quiz_Photos/Hard_Photos/hard_question_5.jpg', "hard_question_5")
+    data_base_photo.add_photo(r'quiz_all_files/Quiz_Photos/Hard_Photos/hard_question_6.jpg', "hard_question_6")
+    data_base_photo.add_photo(r'quiz_all_files/Quiz_Photos/Hard_Photos/hard_question_7.jpg', "hard_question_7")
+    data_base_photo.add_photo(r'quiz_all_files/Quiz_Photos/Hard_Photos/hard_question_8.jpg', "hard_question_8")
+    data_base_photo.add_photo(r'quiz_all_files/Quiz_Photos/Hard_Photos/hard_question_9.jpg', "hard_question_9")
+    data_base_photo.add_photo(r'quiz_all_files/Quiz_Photos/Hard_Photos/hard_question_10.jpg', "hard_question_10")
+    data_base_photo.add_photo(r'quiz_all_files/Quiz_Photos/Hard_Photos/hard_question_11.jpg', "hard_question_11")
+    data_base_photo.add_photo(r'quiz_all_files/Quiz_Photos/Hard_Photos/hard_question_12.jpg', "hard_question_12")
+    data_base_photo.add_photo(r'quiz_all_files/Quiz_Photos/Hard_Photos/hard_question_13.jpg', "hard_question_13")
+    data_base_photo.add_photo(r'quiz_all_files/Quiz_Photos/Hard_Photos/hard_question_14.jpg', "hard_question_14")
+    data_base_photo.add_photo(r'quiz_all_files/Quiz_Photos/Hard_Photos/hard_question_15.jpg', "hard_question_15")
 
     # Кировский район
     data_base_photo.add_photo(
@@ -276,7 +292,6 @@ def do_db_photo(data_base_photo):
         'encyclopedia_voroshilovsky_guestion_6')
 
     return
-
 
 # photos = photo_db.select_all_photos();
 # print(f"БД: {photos=}")

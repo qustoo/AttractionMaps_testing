@@ -8,6 +8,7 @@ from data.checking_answers import func_answer1, func_answer2, func_answer3, func
 from keyboards.default import menu_for_easy_quizing
 from loader import dp, photo_db
 from aiogram import types
+from keyboards.inline.quiz_keyboard import choice_r_q
 
 from states.MachineStates_For_Quiz import QuizEasy
 
@@ -199,6 +200,17 @@ async def finish_test(message: types.Message, state: FSMContext):
 
     # пишем ответы
 
+    list_answer = [func_answer1(message, answer_first),
+                   func_answer2(message, answer_second),
+                   func_answer3(message, answer_second),
+                   func_answer4(message, answer_fourth),
+                   func_answer5(message, answer_5th),
+                   func_answer6(message, answer_6th),
+                   func_answer7(message, answer_7th),
+                   func_answer8(message, answer_8th),
+                   func_answer9(message, answer_9th),
+                   func_answer10(message, answer_10th)]
+
     await func_answer1(message, answer_first)
     await func_answer2(message, answer_second)
     await func_answer3(message, answer_third)
@@ -209,6 +221,7 @@ async def finish_test(message: types.Message, state: FSMContext):
     await func_answer8(message, answer_8th)
     await func_answer9(message, answer_9th)
     await func_answer10(message, answer_10th)
+    #await message.answer('\n'.join(list_answer))
     await message.answer("Чтобы увидеть свой рейтинг, после прохождения викторины нажмите /get_my_rating")
 
     await state.finish()
