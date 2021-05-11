@@ -201,6 +201,5 @@ async def check_answer_hard(message: types.Message, answers):
             RATE = db.select_user(id=message.from_user.id)[-1]
             db.update_rating(id=message.from_user.id, rating=RATE + 3.0)
         else:
-           res += f"Неправильный ответ : {int(i) + 1}\n Верным ответом будет : {List_Of_correct_answers[i]}\n"
+            res += f"Неправильный ответ : {int(i) + 1}\n Верным ответом будет : {List_Of_correct_answers[i]}\n"
     return res
-
