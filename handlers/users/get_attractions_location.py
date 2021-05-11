@@ -1,61 +1,149 @@
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Command
-from aiogram.types import ReplyKeyboardRemove
-from aiogram.utils.markdown import hbold
+from aiogram.types import ReplyKeyboardRemove, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
+from aiogram.utils.callback_data import CallbackData
+from data.locations import Attractions
 
-from data.locations import find_locale
-from keyboards.default import locations_for_button
+from keyboards.default import KeyboardsToSendLocations
+from keyboards.default.KeyboardsToSendLocations import TypeObject, NextOrFinishProgressMap, SelectTypeAttractions, \
+    NextOrFinishLocationKeyboard
 from loader import dp, db
-from utils.misc.calc_for_distance import New_Attract
 from utils.misc.calc_for_distance import choose_nearest
 
 
-# заставляем пользователя отправить локацию
-@dp.message_handler(Command("show_on_map_attractions"))
-async def show_on_map(message: types.Message):
+
+
+
+
+
+# Заносим кнопки в локальное пространство имен
+global_buttons = [SelectTypeAttractions.inline_keyboard[0],
+                  SelectTypeAttractions.inline_keyboard[1],
+                  SelectTypeAttractions.inline_keyboard[2],
+                  SelectTypeAttractions.inline_keyboard[3],
+                  SelectTypeAttractions.inline_keyboard[4],
+                  SelectTypeAttractions.inline_keyboard[5],
+                  SelectTypeAttractions.inline_keyboard[6]
+                  ]
+
+
+# метод нахождения индекса кнопки и её удаление
+async def RemoveButtonsInInlineKeyboard(closes_places, call: CallbackQuery, callback_data: dict, number_to_remove):
+    # удаляем кнопку, если объекта с таким именем не существует
+    if global_buttons[int(number_to_remove)] in SelectTypeAttractions.inline_keyboard:
+        SelectTypeAttractions.inline_keyboard.pop(
+            SelectTypeAttractions.inline_keyboard.index(global_buttons[int(number_to_remove)]))
+    await call.message.edit_text(
+        text="Список мест типа " + callback_data.get('name_place') + " для посещения пуст!\n",
+        reply_markup=SelectTypeAttractions)
+
+
+# формируем строку, которую отправляем пользователю + отравляем локацию объекта + обновляем данные в БД и присылает клавиатуру с 'next/finish'
+async def SendToUserLocationUpdateDataBase(closes_places, call: CallbackQuery):
+    text_format = "{place_name}.\n" \
+                  "Маршрут: <a href='{url}'>Google</a>\n" \
+                  "Расстояние до объекта: {distance:.2f} км\n"
+    text = "\n\n".join(
+        [
+            text_format.format(place_name=place_name, url=url, distance=distance)
+            for place_name, distance, url, place_location in closes_places
+        ]
+    )
+
+    await call.message.answer(f'Спасибо за отправку!\n'
+                              f'Ближайшая к вам:\n'
+                              f'{text}',
+                              disable_web_page_preview=True)
+    for place_name, distance, url, place_location in closes_places:
+        # отправляем пользователю объект по его точному местоположению
+        await call.message.answer_location(
+            latitude=place_location["lat"],
+            longitude=place_location["lon"]
+        )
+        # Обновляем данные юзера в БД
+        db.update_lat(id=call.from_user.id, lat=place_location["lat"])
+        db.update_lon(id=call.from_user.id, lon=place_location["lon"])
+
+    await call.message.answer(text="Если вы хотите продолжить, нажмите кнопку ниже\n",
+                              reply_markup=NextOrFinishLocationKeyboard)
+
+
+@dp.message_handler(Command("show_on_map_attractions"), state=None)
+async def show_on_map(message: types.Message, state: FSMContext):
     await message.answer(
-        f"Здравствуйте,{message.from_user.full_name}.\n"
-        f"Чтобы показать ближайшую достопримечательность,отправьте нам свое местоположение"
-        "нажав на кнопку ниже\n\n"
-        "Давайте условимся, что вы будто уже пришли к локации,"
-        "которую мы вам отправили, и следующая "
-        "локация будет ближайшей к предыдущий локации."
-        "\n" + hbold("Это сделано с целью провести клиента через весь город"),
-        # передам клаву под локацию
-        reply_markup=locations_for_button.keyboard,
-    )
-    await message.answer(f"Давайте условимся, что вы будто уже пришли к локации, "
-                         f"которую мы вам отправили, и следующая"
-                         f"локация будет ближайшей к предыдущий"
-                         f"\n<b>Это сделано с целью провести клиента через весь город<\b>")
+        f"Здравствуйте,{message.from_user.full_name}.\n",
+        reply_markup=KeyboardsToSendLocations.SendToBotUserLocation)
 
 
-# Отказная от отправления локации
 @dp.message_handler(text="Отмена")
-async def quit_get_attract(message: types.Message):
-    await message.answer(f"Вы отказались от ближайшей достопримечательности!\n"
-                         "чтобы вернуться к списку команда нажмите /help", reply_markup=ReplyKeyboardRemove())
+async def exit_locations(message: types.Message, state: FSMContext):
+    await message.answer("Вы отказались\n", reply_markup=ReplyKeyboardRemove())
+    await state.finish()
 
 
-# получили уже локацию
+# state=CallBackLocation.Q1,
 @dp.message_handler(content_types=types.ContentType.LOCATION)
-async def get_location(message: types.Message, state: FSMContext):
-    # получение координат из бд юзера
-    # latt,lonn = db.get_coordinates(id=message.from_user.id)
-    location = message.location
-    latitude = location.latitude
-    longitude = location.longitude
-    closes_places = choose_nearest(message, latitude, longitude, New_Attract.copy())
-    if not closes_places:
-        await message.answer("Список мест для посещения пуст!", reply_markup=ReplyKeyboardRemove())
-        return
+async def go_to_objet(message: types.Message, state: FSMContext):
+    await message.answer(text="Вы отправили локацию", reply_markup=ReplyKeyboardRemove())
+    await message.answer("Выберите объект, который вам интересен", reply_markup=SelectTypeAttractions)
+    # заносим в машину координаты пользователя, которые он отправил
+    await state.update_data(locations_from_user=(message.location.latitude, message.location.longitude))
 
-    # await message.answer(f"\n\n start_position,last_position = {new_start} {new_last}\n\n")
+
+'''
+ФИЛЬТРЫ ДЛЯ КАЖДЫЙ КНОПКИ КОЛЛБЕКА
+'''
+
+
+@dp.callback_query_handler(TypeObject.filter(type_place="Church"))
+async def exit_locations(call: CallbackQuery, callback_data: dict, state: FSMContext):
+    data = await state.get_data()
+    await call.answer(cache_time=1)
+    # заносим в Машину состояний имя того объекта, на который он нажал
+    await state.update_data(lastLocations=callback_data.get('name_place'))
+    # получаем нужную информацию об объекте(имя,ссылка,координаты)
+    closes_places = choose_nearest(data.get("locations_from_user")[0], data.get("locations_from_user")[-1],
+                                   Attractions, callback_data.get('name_place'))
+    if not closes_places:
+        await RemoveButtonsInInlineKeyboard(closes_places, call, callback_data,
+                                            callback_data.get('number_to_remove'))
+        return
+    await SendToUserLocationUpdateDataBase(closes_places, call)
+
+
+@dp.callback_query_handler(TypeObject.filter(type_place="ApartmentBuilding"))
+async def exit_locations(call: CallbackQuery, callback_data: dict, state: FSMContext):
+    await call.answer(cache_time=1)
+    data = await state.get_data()
+    await state.update_data(lastLocations=callback_data.get('name_place'))
+    closes_places = choose_nearest(data.get("locations_from_user")[0], data.get("locations_from_user")[-1],
+                                   Attractions, callback_data.get('name_place'))
+    if not closes_places:
+        await RemoveButtonsInInlineKeyboard(closes_places, call, callback_data,
+                                            callback_data.get('number_to_remove'))
+        return
+    await SendToUserLocationUpdateDataBase(closes_places, call)
+
+
+@dp.callback_query_handler(TypeObject.filter(type_place="Museum"))
+async def exit_locations(call: CallbackQuery, callback_data: dict, state: FSMContext):
+    await call.answer(cache_time=1)
+    data = await state.get_data()
+    await state.update_data(lastLocations=callback_data.get('name_place'))
+    # await call.message.answer(text=f"{callback_data.get('type_place')} {callback_data.get('name_place')}")
+    # await call.message.answer(
+    #     text=str(data.get("locations_from_user")[0]) + " " + str(data.get("locations_from_user")[-1]))
+    closes_places = choose_nearest(data.get("locations_from_user")[0], data.get("locations_from_user")[-1],
+                                   Attractions, callback_data.get('name_place'))
+    if not closes_places:
+        await RemoveButtonsInInlineKeyboard(closes_places, call, callback_data,
+                                            callback_data.get('number_to_remove'))
+        return
 
     text_format = "{place_name}.\n" \
                   "Маршрут: <a href='{url}'>Google</a>\n" \
-                  "Расстояние до объекта: {distance:.2f} км"
+                  "Расстояние до объекта: {distance:.2f} км\n"
     text = "\n\n".join(
         [
             text_format.format(place_name=place_name, url=url, distance=distance)
@@ -63,75 +151,175 @@ async def get_location(message: types.Message, state: FSMContext):
         ]
     )
 
-    await message.answer(f'Спасибо за отправку!\n'
-                         f'Ближайшая к вам:\n'
-                         f'{text}',
-                         disable_web_page_preview=True, reply_markup=ReplyKeyboardRemove()
-                         # Добавил reply_markup=ReplyKeyboardRemove(),
-                         # т.е. убираем клаву после отправки геопозиции
-                         )
+    await call.message.answer(f'Спасибо за отправку!\n'
+                              f'Ближайшая к вам:\n'
+                              f'{text}',
+                              disable_web_page_preview=True)
     for place_name, distance, url, place_location in closes_places:
-        await message.answer_location(
+        # отправляем пользователю объект по его точному местоположению
+        await call.message.answer_location(
             latitude=place_location["lat"],
             longitude=place_location["lon"]
         )
-        # Обновляем данные в БД
-        db.update_lat(id=message.from_user.id, lat=place_location["lat"])
-        db.update_lon(id=message.from_user.id, lon=place_location["lon"])
-    await message.answer("Чтобы перейти к следующией ближайшей достопримечательности нажмите /next")
-    await message.answer("Для завершения нажмите /finish")
+        # Обновляем данные юзера в БД
+        db.update_lat(id=call.from_user.id, lat=place_location["lat"])
+        db.update_lon(id=call.from_user.id, lon=place_location["lon"])
+
+    await call.message.answer(text="Если вы хотите продолжить, нажмите кнопку ниже\n",
+                              reply_markup=NextOrFinishLocationKeyboard)
+
+    # await state.finish()
 
 
-# получаем
-@dp.message_handler(Command("next"))
-async def go_to_nex_location(message: types.Message):
-    new_lat, new_lon = db.get_coordinates(id=message.from_user.id)
-    closes_places = choose_nearest(message, new_lat, new_lon, New_Attract)
+@dp.callback_query_handler(TypeObject.filter(type_place="Palace"))
+async def exit_locations(call: CallbackQuery, callback_data: dict, state: FSMContext):
+    await call.answer(cache_time=1)
+    data = await state.get_data()
+    await state.update_data(lastLocations=callback_data.get('name_place'))
+    closes_places = choose_nearest(data.get("locations_from_user")[0], data.get("locations_from_user")[-1],
+                                   Attractions, callback_data.get('name_place'))
     if not closes_places:
-        await message.answer(text=
-                             "Список мест для посещения закончилось!"
-                             "Для завершения нажмите /finish")
+        await RemoveButtonsInInlineKeyboard(closes_places, call, callback_data,
+                                            callback_data.get('number_to_remove'))
         return
+    await SendToUserLocationUpdateDataBase(closes_places, call)
 
+
+@dp.callback_query_handler(TypeObject.filter(type_place="Monument"))
+async def exit_locations(call: CallbackQuery, callback_data: dict, state: FSMContext):
+    await call.answer(cache_time=1)
+    data = await state.get_data()
+    await state.update_data(lastLocations=callback_data.get('name_place'))
+    # await call.message.answer(text=f"{callback_data.get('type_place')} {callback_data.get('name_place')}")
+    # await call.message.answer(
+    #     text=str(data.get("locations_from_user")[0]) + " " + str(data.get("locations_from_user")[-1]))
+    closes_places = choose_nearest(data.get("locations_from_user")[0], data.get("locations_from_user")[-1],
+                                   Attractions, callback_data.get('name_place'))
+    if not closes_places:
+        await RemoveButtonsInInlineKeyboard(closes_places, call, callback_data,
+                                            callback_data.get('number_to_remove'))
+        return
     text_format = "{place_name}.\n" \
                   "Маршрут: <a href='{url}'>Google</a>\n" \
-                  "Расстояние до объекта: {distance:.2f} км"
+                  "Расстояние до объекта: {distance:.2f} км\n"
     text = "\n\n".join(
         [
             text_format.format(place_name=place_name, url=url, distance=distance)
             for place_name, distance, url, place_location in closes_places
         ]
     )
-    # получаем имя локации, к которой нас отправили
-    # name_of_location = re.match('^[^.]*', text).group(0)
-    # получаем тьюпл локации
-    # tuple_location, iteration = find_locale(name_of_location)
-    '''
-    await message.answer(f"Имя локации = {name_of_location}\n"
-                         f"\nlon = {tuple_location.get('lon')}"
-                         f"\nlat = {tuple_location.get('lat')}") 
-    '''
 
-    await message.answer(f'Спасибо за отправку!\n'
-                         f'Ближайшая к вам:\n'
-                         f'{text}',
-                         disable_web_page_preview=True, reply_markup=ReplyKeyboardRemove()
-                         # Добавил reply_markup=ReplyKeyboardRemove(),
-                         # т.е. убираем клаву после отправки геопозиции
-                         )
+    await call.message.answer(f'Спасибо за отправку!\n'
+                              f'Ближайшая к вам:\n'
+                              f'{text}',
+                              disable_web_page_preview=True)
     for place_name, distance, url, place_location in closes_places:
-        await message.answer_location(
+        # отправляем пользователю объект по его точному местоположению
+        await call.message.answer_location(
             latitude=place_location["lat"],
             longitude=place_location["lon"]
         )
-        # Обновляем данные в БД
-        db.update_lat(id=message.from_user.id, lat=place_location["lat"])
-        db.update_lon(id=message.from_user.id, lon=place_location["lon"])
-    await message.answer("Чтобы перейти к следующией ближайшей достопримечательности нажмите /next")
-    await message.answer("Для завершения нажмите /finish")
+        # Обновляем данные юзера в БД
+        db.update_lat(id=call.from_user.id, lat=place_location["lat"])
+        db.update_lon(id=call.from_user.id, lon=place_location["lon"])
+
+    await call.message.answer(text="Если вы хотите продолжить, нажмите кнопку ниже\n",
+                              reply_markup=NextOrFinishLocationKeyboard)
+
+    # await state.finish()
 
 
-# финишируем
-@dp.message_handler(Command("finish"))
-async def finish_go_to_the_attractions(message: types.Message):
-    await message.answer("Спасибо за пользование нашими командами", reply_markup=ReplyKeyboardRemove())
+@dp.callback_query_handler(TypeObject.filter(type_place="Park"))
+async def exit_locations(call: CallbackQuery, callback_data: dict, state: FSMContext):
+    await call.answer(cache_time=1)
+    data = await state.get_data()
+    await state.update_data(lastLocations=callback_data.get('name_place'))
+    # await call.message.answer(text=f"{callback_data.get('type_place')} {callback_data.get('name_place')}")
+    # await call.message.answer(
+    #     text=str(data.get("locations_from_user")[0]) + " " + str(data.get("locations_from_user")[-1]))
+    closes_places = choose_nearest(data.get("locations_from_user")[0], data.get("locations_from_user")[-1],
+                                   Attractions, callback_data.get('name_place'))
+    if not closes_places:
+        await RemoveButtonsInInlineKeyboard(closes_places, call, callback_data,
+                                            callback_data.get('number_to_remove'))
+        return
+    text_format = "{place_name}.\n" \
+                  "Маршрут: <a href='{url}'>Google</a>\n" \
+                  "Расстояние до объекта: {distance:.2f} км\n"
+    text = "\n\n".join(
+        [
+            text_format.format(place_name=place_name, url=url, distance=distance)
+            for place_name, distance, url, place_location in closes_places
+        ]
+    )
+
+    await call.message.answer(f'Спасибо за отправку!\n'
+                              f'Ближайшая к вам:\n'
+                              f'{text}',
+                              disable_web_page_preview=True)
+    for place_name, distance, url, place_location in closes_places:
+        # отправляем пользователю объект по его точному местоположению
+        await call.message.answer_location(
+            latitude=place_location["lat"],
+            longitude=place_location["lon"]
+        )
+        # Обновляем данные юзера в БД
+        db.update_lat(id=call.from_user.id, lat=place_location["lat"])
+        db.update_lon(id=call.from_user.id, lon=place_location["lon"])
+
+    await call.message.answer(text="Если вы хотите продолжить, нажмите кнопку ниже\n",
+                              reply_markup=NextOrFinishLocationKeyboard)
+
+    # await state.finish()
+
+
+@dp.callback_query_handler(TypeObject.filter(type_place="AnyOne"))
+async def exit_locations(call: CallbackQuery, callback_data: dict, state: FSMContext):
+    await call.answer(cache_time=1)
+    data = await state.get_data()
+    await state.update_data(lastLocations=callback_data.get('name_place'))
+    closes_places = choose_nearest(data.get("locations_from_user")[0], data.get("locations_from_user")[-1],
+                                   Attractions, callback_data.get('name_place'))
+    if not closes_places:
+        await RemoveButtonsInInlineKeyboard(closes_places, call, callback_data,
+                                            callback_data.get('number_to_remove'))
+        return
+    await SendToUserLocationUpdateDataBase(closes_places, call)
+
+
+'''
+ФИЛЬТР ОТМЕНЫ ВЫБОРА ТИПО ДОСТОПРИМЕЧАТЕЛЬНОСТИ В КОЛЛБЕК КЛАВИАТУРЕ
+'''
+
+
+@dp.callback_query_handler(text="cancel_choice_attractions")
+async def cancel_choice_attractions(call: CallbackQuery):
+    await call.message.edit_text("Вы отказались.")
+    await call.message.edit_reply_markup()
+
+
+'''
+ФИЛЬТР ДЛЯ ОТМЕНЫ ПРОХОЖДЕНИЯ СЛЕДУЮЩЕЙ ЛОКАЦИИ
+'''
+
+
+@dp.callback_query_handler(NextOrFinishProgressMap.filter(next="True"))
+async def next_place(call: CallbackQuery, callback_data: dict, state: FSMContext):
+    await call.answer(cache_time=1)
+    data = await state.get_data()
+    user = db.select_user(id=call.from_user.id)
+    # получаем координаты из БД
+    new_lat, new_lon = db.get_coordinates(id=call.from_user.id)
+    closes_places = choose_nearest(new_lat, new_lon, Attractions, name_object=data.get('lastLocations'))
+    if not closes_places:
+        await call.message.edit_text(text='Список мест для посещения закончилось!\n')
+        await call.message.edit_reply_markup()
+        return
+
+    await SendToUserLocationUpdateDataBase(closes_places, call)
+
+
+@dp.callback_query_handler(NextOrFinishProgressMap.filter(next="False"))
+async def Finish_InlineLocations(call: CallbackQuery):
+    await call.message.edit_reply_markup(reply_markup=None)
+    await call.message.edit_text(text="Спасибо")
