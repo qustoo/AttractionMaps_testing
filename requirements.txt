@@ -5,7 +5,7 @@ python-dotenv~=0.17.0
 
 
 
-
+asyncpg~=0.22.0
 pip~=21.0.1
 attrs~=20.3.0
 pytz~=2021.1

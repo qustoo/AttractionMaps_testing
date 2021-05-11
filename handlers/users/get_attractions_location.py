@@ -4,14 +4,14 @@ from aiogram.dispatcher.filters import Command
 from aiogram.types import ReplyKeyboardRemove
 from aiogram.utils.markdown import hbold
 
-from data.locations import find_locale
+from data.locations import Attractions
 from keyboards.default import locations_for_button
 from loader import dp, db
-from utils.misc.calc_for_distance import New_Attract
+from utils.misc.calc_for_distance import SetTrueForAllAttractions
 from utils.misc.calc_for_distance import choose_nearest
 
 
-# заставляем пользователя отправить локацию
+# Просим пользователя отправить свою геопозицию
 @dp.message_handler(Command("show_on_map_attractions"))
 async def show_on_map(message: types.Message):
     await message.answer(
@@ -22,40 +22,50 @@ async def show_on_map(message: types.Message):
         "которую мы вам отправили, и следующая "
         "локация будет ближайшей к предыдущий локации."
         "\n" + hbold("Это сделано с целью провести клиента через весь город"),
-        # передам клаву под локацию
         reply_markup=locations_for_button.keyboard,
     )
-    await message.answer(f"Давайте условимся, что вы будто уже пришли к локации, "
-                         f"которую мы вам отправили, и следующая"
-                         f"локация будет ближайшей к предыдущий"
-                         f"\n<b>Это сделано с целью провести клиента через весь город<\b>")
+
+    if db.select_user(id=message.from_user.id)[-2] != 0.0 and db.select_user(id=message.from_user.id)[-3] != 0.0:
+        db.update_lat(id=message.from_user.id, lat=float(0.0))
+        db.update_lon(id=message.from_user.id, lon=float(0.0))
 
 
-# Отказная от отправления локации
+# db.update_lat(id=message.from_user.id, lat=0.0)
+# db.update_lon(id=message.from_user.id, lon=0.0)
+# Удаляем старые координаты пользователя
+
+
+# Устанавливаем в каждом месте обход - True
+@dp.message_handler(Command("reset_map"))
+async def reset_map(message: types.Message):
+    SetTrueForAllAttractions(Attractions)
+    await message.answer(text=
+                         f'Карта была успешно сброшена.\n'
+                         'Чтобы начать поиск локации заново, нажми ' + hbold('/show_on_map_attractions'))
+
+
+# Отказ отправления геопозиции пользователя
 @dp.message_handler(text="Отмена")
 async def quit_get_attract(message: types.Message):
     await message.answer(f"Вы отказались от ближайшей достопримечательности!\n"
-                         "чтобы вернуться к списку команда нажмите /help", reply_markup=ReplyKeyboardRemove())
+                         'чтобы вернуться к списку команда нажмите' + hbold('/help'),
+                         reply_markup=ReplyKeyboardRemove())
 
 
-# получили уже локацию
+# Получили от юзера его местоположение
 @dp.message_handler(content_types=types.ContentType.LOCATION)
 async def get_location(message: types.Message, state: FSMContext):
-    # получение координат из бд юзера
-    # latt,lonn = db.get_coordinates(id=message.from_user.id)
-    location = message.location
-    latitude = location.latitude
-    longitude = location.longitude
-    closes_places = choose_nearest(message, latitude, longitude, New_Attract.copy())
+    latitude = message.location.latitude
+    longitude = message.location.longitude
+    closes_places = choose_nearest(latitude, longitude, Attractions)
+    # если список пуст
     if not closes_places:
         await message.answer("Список мест для посещения пуст!", reply_markup=ReplyKeyboardRemove())
         return
 
-    # await message.answer(f"\n\n start_position,last_position = {new_start} {new_last}\n\n")
-
     text_format = "{place_name}.\n" \
                   "Маршрут: <a href='{url}'>Google</a>\n" \
-                  "Расстояние до объекта: {distance:.2f} км"
+                  "Расстояние до объекта: {distance:.2f} км\n"
     text = "\n\n".join(
         [
             text_format.format(place_name=place_name, url=url, distance=distance)
@@ -66,72 +76,67 @@ async def get_location(message: types.Message, state: FSMContext):
     await message.answer(f'Спасибо за отправку!\n'
                          f'Ближайшая к вам:\n'
                          f'{text}',
-                         disable_web_page_preview=True, reply_markup=ReplyKeyboardRemove()
-                         # Добавил reply_markup=ReplyKeyboardRemove(),
-                         # т.е. убираем клаву после отправки геопозиции
-                         )
+                         disable_web_page_preview=True, reply_markup=ReplyKeyboardRemove())
     for place_name, distance, url, place_location in closes_places:
+        # отправляем пользователю объект по его точному местоположению
         await message.answer_location(
             latitude=place_location["lat"],
             longitude=place_location["lon"]
         )
-        # Обновляем данные в БД
+        # Обновляем данные юзера в БД
         db.update_lat(id=message.from_user.id, lat=place_location["lat"])
         db.update_lon(id=message.from_user.id, lon=place_location["lon"])
-    await message.answer("Чтобы перейти к следующией ближайшей достопримечательности нажмите /next")
-    await message.answer("Для завершения нажмите /finish")
+    await message.answer(text='Чтобы перейти к следующией ближайшей достопримечательности нажмите ' + hbold('/next'))
+    await message.answer(text='Для завершения нажмите ' + hbold('/finish'))
+    # print(closes_places)
 
 
-# получаем
+# Переходим к следующему объекту.
 @dp.message_handler(Command("next"))
 async def go_to_nex_location(message: types.Message):
     new_lat, new_lon = db.get_coordinates(id=message.from_user.id)
-    closes_places = choose_nearest(message, new_lat, new_lon, New_Attract)
+    closes_places = choose_nearest(new_lat, new_lon, Attractions)
+    # если список пуст
     if not closes_places:
         await message.answer(text=
-                             "Список мест для посещения закончилось!"
-                             "Для завершения нажмите /finish")
+                             'Список мест для посещения закончилось!\n'
+                             'Для завершения нажмите /finish')
         return
 
     text_format = "{place_name}.\n" \
                   "Маршрут: <a href='{url}'>Google</a>\n" \
                   "Расстояние до объекта: {distance:.2f} км"
-    text = "\n\n".join(
+    text_next = "\n\n".join(
         [
             text_format.format(place_name=place_name, url=url, distance=distance)
             for place_name, distance, url, place_location in closes_places
         ]
     )
-    # получаем имя локации, к которой нас отправили
-    # name_of_location = re.match('^[^.]*', text).group(0)
-    # получаем тьюпл локации
-    # tuple_location, iteration = find_locale(name_of_location)
-    '''
-    await message.answer(f"Имя локации = {name_of_location}\n"
-                         f"\nlon = {tuple_location.get('lon')}"
-                         f"\nlat = {tuple_location.get('lat')}") 
-    '''
 
     await message.answer(f'Спасибо за отправку!\n'
-                         f'Ближайшая к вам:\n'
-                         f'{text}',
-                         disable_web_page_preview=True, reply_markup=ReplyKeyboardRemove()
-                         # Добавил reply_markup=ReplyKeyboardRemove(),
-                         # т.е. убираем клаву после отправки геопозиции
-                         )
+                         f'Ближайшая к вам:\n\n'
+                         f'{text_next}',
+                         disable_web_page_preview=True, reply_markup=ReplyKeyboardRemove())
+
     for place_name, distance, url, place_location in closes_places:
         await message.answer_location(
+            # отправляем пользователю объект по его точному местоположению
             latitude=place_location["lat"],
             longitude=place_location["lon"]
         )
-        # Обновляем данные в БД
+        # Обновляем данные юзера в БД
         db.update_lat(id=message.from_user.id, lat=place_location["lat"])
         db.update_lon(id=message.from_user.id, lon=place_location["lon"])
-    await message.answer("Чтобы перейти к следующией ближайшей достопримечательности нажмите /next")
-    await message.answer("Для завершения нажмите /finish")
+    await message.answer(text='Чтобы перейти к следующией ближайшей достопримечательности нажмите ' + hbold('/next'))
+    await message.answer(text='Для завершения нажмите ' + hbold('/finish'))
+    # print(closes_places)
 
 
-# финишируем
+# Финишируем проход по локациям
 @dp.message_handler(Command("finish"))
 async def finish_go_to_the_attractions(message: types.Message):
-    await message.answer("Спасибо за пользование нашими командами", reply_markup=ReplyKeyboardRemove())
+    await message.answer(text="\n".join(
+        [
+            'Для сброса карты нажми ' + hbold('/reset_map')
+        ]
+    ), reply_markup=ReplyKeyboardRemove())

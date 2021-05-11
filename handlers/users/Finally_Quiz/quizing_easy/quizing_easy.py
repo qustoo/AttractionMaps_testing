@@ -3,8 +3,7 @@ from aiogram.dispatcher.filters import Command
 from aiogram.types import ReplyKeyboardRemove
 
 from quiz_all_files.Quiz_Questions.questions_quiz import Easy_Array_Questions
-from data.checking_answers import func_answer1, func_answer2, func_answer3, func_answer4, func_answer5, func_answer6, \
-    func_answer7, func_answer8, func_answer9, func_answer10
+from data.checking_answers import check_answer_easy
 from keyboards.default import menu_for_easy_quizing
 from loader import dp, photo_db
 from aiogram import types
@@ -184,43 +183,16 @@ async def finish_test(message: types.Message, state: FSMContext):
     # получаем все данные
     data = await state.get_data()
 
-    # пишем их в переменные
-    answer_first = data.get("answer1")
-    answer_second = data.get("answer2")
-    answer_third = data.get("answer3")
-    answer_fourth = data.get("answer4")
-    answer_5th = data.get("answer5")
-    answer_6th = data.get("answer6")
-    answer_7th = data.get("answer7")
-    answer_8th = data.get("answer8")
-    answer_9th = data.get("answer9")
-    answer_10th = data.get("answer10")
-
     await message.answer("Ваши ответы:")
 
     # пишем ответы
 
-    list_answer = [func_answer1(message, answer_first),
-                   func_answer2(message, answer_second),
-                   func_answer3(message, answer_second),
-                   func_answer4(message, answer_fourth),
-                   func_answer5(message, answer_5th),
-                   func_answer6(message, answer_6th),
-                   func_answer7(message, answer_7th),
-                   func_answer8(message, answer_8th),
-                   func_answer9(message, answer_9th),
-                   func_answer10(message, answer_10th)]
+    checked = []
 
-    await func_answer1(message, answer_first)
-    await func_answer2(message, answer_second)
-    await func_answer3(message, answer_third)
-    await func_answer4(message, answer_fourth)
-    await func_answer5(message, answer_5th)
-    await func_answer6(message, answer_6th)
-    await func_answer7(message, answer_7th)
-    await func_answer8(message, answer_8th)
-    await func_answer9(message, answer_9th)
-    await func_answer10(message, answer_10th)
+    for i in range(len(data)):
+        checked.append(await check_answer_easy(message, data.get("answer" + str(i + 1)), i + 1))
+
+    await message.answer('\n'.join(checked))
     #await message.answer('\n'.join(list_answer))
     await message.answer("Чтобы увидеть свой рейтинг, после прохождения викторины нажмите /get_my_rating")
 
