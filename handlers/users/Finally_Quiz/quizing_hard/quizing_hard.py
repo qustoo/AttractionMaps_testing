@@ -1,13 +1,17 @@
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Command
 
-from data.checking_answers_hard_level import check_answer_hard
+from data.checking_answers_hard_level import check_answer_hard_1, check_answer_hard_2, check_answer_hard_3, \
+    check_answer_hard_4, check_answer_hard_5, check_answer_hard_6, check_answer_hard_7, check_answer_hard_8, \
+    check_answer_hard_9, check_answer_hard_10, check_answer_hard_11, check_answer_hard_12, check_answer_hard_13, \
+    check_answer_hard_14, check_answer_hard_15, check_answer_hard
 
 from quiz_all_files.Quiz_Questions.questions_quiz import Hard_Array_Questions
 from loader import dp, photo_db
 from aiogram import types
 
 from states.MachineStates_For_Quiz import QuizHard
+
 user_answers = []
 
 
@@ -29,7 +33,7 @@ async def answer_test_1(message: types.Message, state: FSMContext):
     # отправляем новую фотку + вопрос
     await message.answer_photo(photo=open(photo_db.get_one_file_name(name='hard_question_2'), 'rb'))
     await message.answer("Вопрос 2:\n" + Hard_Array_Questions[1])
-    await QuizHard.Q2.set()
+    await QuizHard.Q15.set()
 
 
 @dp.message_handler(state=QuizHard.Q2)
@@ -206,6 +210,5 @@ async def answer_test_1(message: types.Message, state: FSMContext):
     # сохраняем последний ответ
     user_answers.append(message.text)
     await state.update_data(answer15=message.text)
-    results = await check_answer_hard(message,user_answers)
-    await message.answer(results))
+    res_all = await check_answer_hard(message, user_answers)
     await state.finish()
