@@ -31,4 +31,3 @@ async def check_answer_medium(message: types.Message, str_ans, num):
     else:
         return "Вопрос " + str(num) + ": Неправильный ответ!"
 
-# print(re.search(str(List_Of_Pattern_regex[2]), 'суд', re.IGNORECASE))
