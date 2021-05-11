@@ -203,3 +203,4 @@ async def check_answer_hard(message: types.Message, answers):
         else:
             result_str += hbold(f"Неправильный ответ : {int(i) + 1}\n Верным ответом будет :") + f" {List_Of_correct_answers[i]}\n"
     return result_str
+
