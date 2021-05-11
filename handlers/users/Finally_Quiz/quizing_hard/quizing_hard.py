@@ -210,5 +210,6 @@ async def answer_test_1(message: types.Message, state: FSMContext):
     # сохраняем последний ответ
     user_answers.append(message.text)
     await state.update_data(answer15=message.text)
-    res_all = await check_answer_hard(message, user_answers)
+    total_answers = await check_answer_hard(message, List_of_answers_hard)
+    await message.answer(total_answers)
     await state.finish()
