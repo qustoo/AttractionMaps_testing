@@ -23,12 +23,12 @@ List_Of_Pattern_regex = [
     "^((((\s*церковь)\s*всех\s*святых\s*)|(новопоселенское\s*(городское)?\s*кладбище\s*))\s*(,|.|и|или){0,2}\s*((?!\2)(((\s*церковь)\s*всех\s*святых\s*)|(\s*новопоселенское\s*(городское)?\s*кладбище\s*))?)\s*)$"
 ]
 
-List_Of_answers = [
-    "Стало первым в стране, спроектированным специально для размещения морских животных",
-    "Назвитие творческого потенциала студентов и организация их полноценного досуга",
-    "Поздний памятник конструктивизма",
-    "Открытие «ростов арены» состоялось  15 апреля 2018 г  матчем чемпионата россии между «ростовом» и «ска-хабаровск» (2:0)",
-    "Эклектика барокко классицизм",
+List_Of_Correct_answers = [
+    "стало первым в стране, спроектированным специально для размещения морских животных",
+    "развитие творческого потенциала студентов и организация их полноценного досуга",
+    "поздний памятник конструктивизма",
+    "открытие «ростов арены» состоялось  15 апреля 2018 г  матчем чемпионата россии между «ростовом» и «ска-хабаровск» (2:0)",
+    "эклектика барокко классицизм",
     "1967 Э. М. Мирзоев",
     "По инициативе ветеранских организаций воинов-интернационалистов и личному содействию Губернатора Ростовской области В.Ю.Голубева",
     "На аллее высажено 6,5 тысяч этих красивейших цветов",
@@ -41,13 +41,14 @@ List_Of_answers = [
     "Церковь всех святых или новопоселенское городское кладбище"
 ]
 
-
-
-async def check_answer_hard(message: types.Message, str_ans, num):
-    result = re.search(str(List_Of_Pattern_regex[num-1]), str(str_ans), re.IGNORECASE)
-    if result is not None:
-        RATE = db.select_user(id=message.from_user.id)[-1]
-        db.update_rating(id=message.from_user.id, rating=RATE + 3.0)
-        return "Вопрос " + str(num) + ": Правильный ответ!"
-    else:
-        return "Вопрос " + str(num) + hbold(": Ошибка") + " \nПравильным ответом будет: \n" + hbold(str(List_Of_answers[num-1])) + "\n"
+async def check_answer_hard(message: types.Message, answers):
+    assert (len(answers) == len(List_Of_Pattern_regex))
+    resultstr = ""
+    for i in range(0, len(answers)):
+        if re.search(List_Of_Pattern_regex[i], answers[i], re.IGNORECASE) is not None:
+            resultstr += hbold(f"Правильный ответ : {int(i) + 1}\n")
+            RATE = db.select_user(id=message.from_user.id)[-1]
+            db.update_rating(id=message.from_user.id, rating=RATE + 3.0)
+        else:
+            resultstr += f"Неправильный ответ : {int(i) + 1}\n Верным ответом будет : {List_Of_Correct_answers[i]}\n"
+    return resultstr
