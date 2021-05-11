@@ -28,6 +28,6 @@ save_location = ReplyKeyboardMarkup(
     ],
     resize_keyboard=True,
     # одна кнопка в строке
-    row_width=1
+    row_width=2
 
 )
