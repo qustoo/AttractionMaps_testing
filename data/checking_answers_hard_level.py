@@ -194,12 +194,12 @@ async def check_answer_hard_15(message: types.Message, str_ans):
 
 async def check_answer_hard(message: types.Message, answers):
     assert (len(answers) == len(List_Of_Pattern_regex))
-    resultstr = ""
+    results = ""
     for i in range(0, len(answers)):
         if re.search(List_Of_Pattern_regex[i], answers[i], re.IGNORECASE) is not None:
-            resultstr += hbold(f"Правильный ответ : {int(i) + 1}\n")
+            results += hbold(f"Правильный ответ : {int(i) + 1}\n")
             RATE = db.select_user(id=message.from_user.id)[-1]
             db.update_rating(id=message.from_user.id, rating=RATE + 3.0)
         else:
-            resultstr += hbold(f"Неправильный ответ : {int(i) + 1}\n Верным ответом будет :") + f" {List_Of_correct_answers[i]}\n"
-    return resultstr
+            results += hbold(f"Неправильный ответ : {int(i) + 1}\n Верным ответом будет :") + f" {List_Of_correct_answers[i]}\n"
+    return results
