@@ -256,5 +256,4 @@ async def answer_test_1(message: types.Message, state: FSMContext):
     # await state.finish()
     total_answers = await check_answer_hard(message, List_of_answers_hard)
     await message.answer(total_answers)
-
     await state.finish()
