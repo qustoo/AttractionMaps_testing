@@ -1,10 +1,7 @@
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Command
 
-from data.checking_answers_hard_level import check_answer_hard_1, check_answer_hard_2, check_answer_hard_3, \
-    check_answer_hard_4, check_answer_hard_5, check_answer_hard_6, check_answer_hard_7, check_answer_hard_8, \
-    check_answer_hard_9, check_answer_hard_10, check_answer_hard_11, check_answer_hard_12, check_answer_hard_13, \
-    check_answer_hard_14, check_answer_hard_15, check_answer_hard
+from data.checking_answers_hard_level import check_answer_hard
 
 from quiz_all_files.Quiz_Questions.questions_quiz import Hard_Array_Questions
 from loader import dp, photo_db
@@ -30,7 +27,7 @@ async def answer_test_1(message: types.Message, state: FSMContext):
     # отправляем новую фотку + вопрос
     await message.answer_photo(photo=open(photo_db.get_one_file_name(name='hard_question_2'), 'rb'))
     await message.answer("Вопрос 2:\n" + Hard_Array_Questions[1])
-    await QuizHard.Q15.set()
+    await QuizHard.Q2.set()
 
 
 @dp.message_handler(state=QuizHard.Q2)
@@ -194,39 +191,6 @@ async def answer_test_1(message: types.Message, state: FSMContext):
     # сохраняем последний ответ
     await state.update_data(answer15=message.text)
 
-    # сохраняем и пишем данные
-    # data = await state.get_data()
-    # answer1 = data.get("answer1")
-    # answer2 = data.get("answer2")
-    # answer3 = data.get("answer3")
-    # answer4 = data.get("answer4")
-    # answer5 = data.get("answer5")
-    # answer6 = data.get("answer6")
-    # answer7 = data.get("answer7")
-    # answer8 = data.get("answer8")
-    # answer9 = data.get("answer9")
-    # answer10 = data.get("answer10")
-    # answer11 = data.get("answer11")
-    # answer12 = data.get("answer12")
-    # answer13 = data.get("answer13")
-    # answer14 = data.get("answer14")
-    # answer15 = message.text
-    #
-    # await check_answer_hard_1(message, answer1)
-    # await check_answer_hard_2(message, answer2)
-    # await check_answer_hard_3(message, answer3)
-    # await check_answer_hard_4(message, answer4)
-    # await check_answer_hard_5(message, answer5)
-    # await check_answer_hard_6(message, answer6)
-    # await check_answer_hard_7(message, answer7)
-    # await check_answer_hard_8(message, answer8)
-    # await check_answer_hard_9(message, answer9)
-    # await check_answer_hard_10(message, answer10)
-    # await check_answer_hard_11(message, answer11)
-    # await check_answer_hard_12(message, answer12)
-    # await check_answer_hard_13(message, answer13)
-    # await check_answer_hard_14(message, answer14)
-    # await check_answer_hard_15(message, answer15)
 
     # сохраняем и пишем данные
     data = await state.get_data()
