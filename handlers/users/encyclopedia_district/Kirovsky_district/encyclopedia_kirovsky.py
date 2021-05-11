@@ -1,78 +1,39 @@
-from aiogram.types import CallbackQuery
+from aiogram.types import CallbackQuery, InputMediaPhoto
 
-from encyclopedia_all_files.Encyclopedia_District.Kirovsky_region.photos import Kirovsky_photo1, Kirovsky_photo5, \
-    Kirovsky_photo4, Kirovsky_photo3, Kirovsky_photo2
-from encyclopedia_all_files.Encyclopedia_District.Kirovsky_region.text import Kirovsky_text1, Kirovsky_text2, \
-    Kirovsky_text3, Kirovsky_text4, Kirovsky_text5
-from handlers.users.encyclopedia import d
+from encyclopedia_all_files.Encyclopedia_District.Kirovsky_region.photos import Kirovsky_photo, max_kir_photo
+from encyclopedia_all_files.Encyclopedia_District.Kirovsky_region.text import Kirovsky_text, max_kir
+from handlers.users.encyclopedia import get_page
+
 from keyboards.inline.callback_datas import place_callback
-from keyboards.inline.encyclopedia import kirov_keyboard
+from keyboards.inline.encyclopedia import get_page_keyboard, pagination_call, get_text
+
 from loader import dp, photo_db
 
 
+
 @dp.callback_query_handler(place_callback.filter(item_name="kir_r"))
-async def oct_region(call: CallbackQuery, callback_data: dict):
+async def kir_region_pag(call: CallbackQuery, callback_data: dict):
     await call.answer(cache_time=60)
-    await call.message.answer("Кировский район\n", reply_markup=kirov_keyboard)
+    text= get_page(Kirovsky_text)
+    photo=get_page(Kirovsky_photo)
+    await call.message.answer_photo(photo=open(photo_db.get_one_file_name(name=photo), 'rb'), reply_markup=get_page_keyboard(k="kir",max=max_kir_photo))
+    await call.message.answer(text=text, reply_markup=get_text(max=max_kir,k="kir_t"))
 
 
-@dp.callback_query_handler(place_callback.filter(item_name="1kir"))
-async def oct_1(call: CallbackQuery, callback_data: dict):
+@dp.callback_query_handler(pagination_call.filter(key="kir"))
+async def show_current_page(call: CallbackQuery, callback_data: dict):
     await call.answer(cache_time=60)
-    if len(d) < len(Kirovsky_photo1):
-        await call.message.answer_photo(photo=open(photo_db.get_one_file_name(name=Kirovsky_photo1[len(d)]), 'rb'))
-        await call.message.answer(text=Kirovsky_text1[len(d)])
-    else:
-        await call.message.answer("больше нет😔")
+    current_page=int(callback_data.get("page"))
+    photo = get_page(array=Kirovsky_photo,page=current_page)
 
+    media=InputMediaPhoto(media=open(photo_db.get_one_file_name(name=photo),'rb'))
+    markup=get_page_keyboard(k="kir",max=max_kir_photo,page=current_page)
 
-@dp.callback_query_handler(place_callback.filter(item_name="2kir"))
-async def oct_2(call: CallbackQuery, callback_data: dict):
+    await call.message.edit_media(media= media, reply_markup=markup)
+
+@dp.callback_query_handler(pagination_call.filter(key="kir_t"))
+async def show_current_page(call: CallbackQuery, callback_data: dict):
     await call.answer(cache_time=60)
-    if len(d) < len(Kirovsky_photo2):
-        await call.message.answer_photo(photo=open(photo_db.get_one_file_name(name=Kirovsky_photo2[len(d)]), 'rb'))
-        await call.message.answer(text=Kirovsky_text2[len(d)])
-    else:
-        await call.message.answer("больше нет😔")
-
-
-@dp.callback_query_handler(place_callback.filter(item_name="3kir"))
-async def oct_3(call: CallbackQuery, callback_data: dict):
-    await call.answer(cache_time=60)
-    if len(d) < len(Kirovsky_photo3):
-        await call.message.answer_photo(photo=open(photo_db.get_one_file_name(name=Kirovsky_photo3[len(d)]), 'rb'))
-        await call.message.answer(text=Kirovsky_text3[len(d)])
-    else:
-        await call.message.answer("больше нет😔")
-
-
-@dp.callback_query_handler(place_callback.filter(item_name="4kir"))
-async def oct_4(call: CallbackQuery, callback_data: dict):
-    await call.answer(cache_time=60)
-    if len(d) < len(Kirovsky_photo4):
-        await call.message.answer_photo(photo=open(photo_db.get_one_file_name(name=Kirovsky_photo4[len(d)]), 'rb'))
-        await call.message.answer(text=Kirovsky_text4[len(d)])
-    else:
-        await call.message.answer("больше нет😔")
-
-
-@dp.callback_query_handler(place_callback.filter(item_name="5kir"))
-async def oct_5(call: CallbackQuery, callback_data: dict):
-    await call.answer(cache_time=60)
-    if len(d) < len(Kirovsky_photo5):
-        await call.message.answer_photo(photo=open(photo_db.get_one_file_name(name=Kirovsky_photo5[len(d)]), 'rb'))
-        await call.message.answer(text=Kirovsky_text5[len(d)])
-    else:
-        await call.message.answer("больше нет😔")
-
-
-@dp.callback_query_handler(place_callback.filter(item_name="show_more_kir"))
-async def show_more(call: CallbackQuery, callback_data: dict):
-    await call.answer(cache_time=60)
-
-    if len(d) < len(Kirovsky_photo1) - 1:
-        d.append(0)
-        await call.message.edit_reply_markup(reply_markup=None)
-        await call.message.answer("Продолжение...", reply_markup=kirov_keyboard)
-    else:
-        await call.message.answer("больше нет😔")
+    current_page=int(callback_data.get("page"))
+    text=get_page(array=Kirovsky_text,page=current_page)
+    await call.message.edit_text(text=text, reply_markup=get_text(k="kir_t",max=max_kir,page=current_page))

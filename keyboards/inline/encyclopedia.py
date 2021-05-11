@@ -1,5 +1,6 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from keyboards.inline.callback_datas import place_callback
+
+from keyboards.inline.callback_datas import place_callback, pagination_call
 
 choice_p = InlineKeyboardMarkup(
     inline_keyboard=[
@@ -13,11 +14,6 @@ choice_p = InlineKeyboardMarkup(
                 (
                 text="Кировский",
                 callback_data=place_callback.new(item_name="kir_r")
-            ),
-            InlineKeyboardButton
-                (
-                text="Октябрьский",
-                callback_data=place_callback.new(item_name="oct_r")
             ),
 
         ],
@@ -35,9 +31,17 @@ choice_p = InlineKeyboardMarkup(
         [
             InlineKeyboardButton
                 (
+                text="Октябрьский",
+                callback_data=place_callback.new(item_name="oct_r")
+            ),
+            InlineKeyboardButton
+                (
                 text="Ленинский",
                 callback_data=place_callback.new(item_name="len_r")
             ),
+        ],
+        [
+
             InlineKeyboardButton
                 (
                 text="Первомайский",
@@ -58,75 +62,66 @@ choice_p = InlineKeyboardMarkup(
         ]
     ]
 )
-#клавиатура для советского района
-soviet_keyboard = InlineKeyboardMarkup(inline_keyboard=[[
-    InlineKeyboardButton(text="1️⃣", callback_data=place_callback.new(item_name=1)),
-    InlineKeyboardButton(text="2️⃣", callback_data=place_callback.new(item_name=2)),
-    InlineKeyboardButton(text="3️⃣", callback_data=place_callback.new(item_name=3))],
-    [InlineKeyboardButton(text="4️⃣", callback_data=place_callback.new(item_name=4)),
-     InlineKeyboardButton(text="5️⃣", callback_data=place_callback.new(item_name=5)),
-     InlineKeyboardButton(text="Показать еще", callback_data=place_callback.new(item_name="show_more"))]
-])
-#клавиатура для октябрьского района
-oct_keyboard = InlineKeyboardMarkup(inline_keyboard=[[
-    InlineKeyboardButton(text="1️⃣", callback_data=place_callback.new(item_name="1ok")),
-    InlineKeyboardButton(text="2️⃣", callback_data=place_callback.new(item_name="2ok")),
-    InlineKeyboardButton(text="3️⃣", callback_data=place_callback.new(item_name="3ok"))],
-    [InlineKeyboardButton(text="4️⃣", callback_data=place_callback.new(item_name="4ok")),
-     InlineKeyboardButton(text="5️⃣", callback_data=place_callback.new(item_name="5ok")),
-     InlineKeyboardButton(text="Показать еще", callback_data=place_callback.new(item_name="show_more_ok"))]
-])
-#клавиатура для пролетарского района
-prolet_keyboard = InlineKeyboardMarkup(inline_keyboard=[[
-    InlineKeyboardButton(text="1️⃣", callback_data=place_callback.new(item_name="1pr")),
-    InlineKeyboardButton(text="2️⃣", callback_data=place_callback.new(item_name="2pr")),
-    InlineKeyboardButton(text="3️⃣", callback_data=place_callback.new(item_name="3pr"))],
-    [InlineKeyboardButton(text="4️⃣", callback_data=place_callback.new(item_name="4pr")),
-     InlineKeyboardButton(text="5️⃣", callback_data=place_callback.new(item_name="5pr")),
-     InlineKeyboardButton(text="Показать еще", callback_data=place_callback.new(item_name="show_more_pr"))]
-])
-#клавиатура для кировского района
-kirov_keyboard = InlineKeyboardMarkup(inline_keyboard=[[
-    InlineKeyboardButton(text="1️⃣", callback_data=place_callback.new(item_name="1kir")),
-    InlineKeyboardButton(text="2️⃣", callback_data=place_callback.new(item_name="2kir")),
-    InlineKeyboardButton(text="3️⃣", callback_data=place_callback.new(item_name="3kir"))],
-    [InlineKeyboardButton(text="4️⃣", callback_data=place_callback.new(item_name="4kir")),
-     InlineKeyboardButton(text="5️⃣", callback_data=place_callback.new(item_name="5kir")),
-     InlineKeyboardButton(text="Показать еще", callback_data=place_callback.new(item_name="show_more_kir"))]
-])
-#клавиатура для ленинского района
-len_keyboard = InlineKeyboardMarkup(inline_keyboard=[[
-    InlineKeyboardButton(text="1️⃣", callback_data=place_callback.new(item_name="1len")),
-    InlineKeyboardButton(text="2️⃣", callback_data=place_callback.new(item_name="2len")),
-    InlineKeyboardButton(text="3️⃣", callback_data=place_callback.new(item_name="3len"))],
-    [InlineKeyboardButton(text="4️⃣", callback_data=place_callback.new(item_name="4len")),
-     InlineKeyboardButton(text="5️⃣", callback_data=place_callback.new(item_name="5len")),
-     InlineKeyboardButton(text="Показать еще", callback_data=place_callback.new(item_name="show_more_len"))]
-])
-#клавиатура для железнодорожного района
-rai_keyboard = InlineKeyboardMarkup(inline_keyboard=[[
-    InlineKeyboardButton(text="1️⃣", callback_data=place_callback.new(item_name="1rai")),
-    InlineKeyboardButton(text="2️⃣", callback_data=place_callback.new(item_name="2rai")),
-    InlineKeyboardButton(text="3️⃣", callback_data=place_callback.new(item_name="3rai"))],
-    [InlineKeyboardButton(text="4️⃣", callback_data=place_callback.new(item_name="4rai")),
-     InlineKeyboardButton(text="5️⃣", callback_data=place_callback.new(item_name="5rai")),
-     InlineKeyboardButton(text="Показать еще", callback_data=place_callback.new(item_name="show_more_rai"))]
-])
-#клавиатура для ворошиловского района
-vor_keyboard = InlineKeyboardMarkup(inline_keyboard=[[
-    InlineKeyboardButton(text="1️⃣", callback_data=place_callback.new(item_name="1vor")),
-    InlineKeyboardButton(text="2️⃣", callback_data=place_callback.new(item_name="2vor")),
-    InlineKeyboardButton(text="3️⃣", callback_data=place_callback.new(item_name="3vor"))],
-    [InlineKeyboardButton(text="4️⃣", callback_data=place_callback.new(item_name="4vor")),
-     InlineKeyboardButton(text="5️⃣", callback_data=place_callback.new(item_name="5vor")),
-     InlineKeyboardButton(text="Показать еще", callback_data=place_callback.new(item_name="show_more_vor"))]
-])
-#клавиатура для первомайского района
-per_keyboard = InlineKeyboardMarkup(inline_keyboard=[[
-    InlineKeyboardButton(text="1️⃣", callback_data=place_callback.new(item_name="1per")),
-    InlineKeyboardButton(text="2️⃣", callback_data=place_callback.new(item_name="2per")),
-    InlineKeyboardButton(text="3️⃣", callback_data=place_callback.new(item_name="3per"))],
-    [InlineKeyboardButton(text="4️⃣", callback_data=place_callback.new(item_name="4per")),
-     InlineKeyboardButton(text="5️⃣", callback_data=place_callback.new(item_name="5per")),
-     InlineKeyboardButton(text="Показать еще", callback_data=place_callback.new(item_name="show_more_per"))]
-])
+
+def get_page_keyboard(k:str,max:int,page:int=1):
+    previous_page=page-1
+    previous_page_text="<< "
+    current_page_text=f"<{page}>"
+    next_page = page+1
+    next_page_text=" >>"
+    markup=InlineKeyboardMarkup()
+    if previous_page>0:
+        markup.insert(InlineKeyboardButton
+                      (text=previous_page_text,
+                       callback_data=pagination_call.new(key=k, page=previous_page))
+                       )
+    markup.insert(InlineKeyboardButton
+                  (text=current_page_text,
+                   callback_data=pagination_call.new(key=k, page="current_page")
+                   )
+                  )
+    if page < max:
+        markup.insert(InlineKeyboardButton
+                      (text=next_page_text,
+                       callback_data=pagination_call.new(key=k, page=next_page)
+                       )
+                      )
+    if previous_page>0:
+        markup.insert(InlineKeyboardButton
+                      (text="начало",
+                       callback_data=pagination_call.new(key=k, page=1))
+                      )
+
+    return markup
+
+
+def get_text(k:str,max:int,page:int=1):
+    previous_page = page - 1
+    previous_page_text = "<< "
+    current_page_text = f"<{page}>"
+    next_page = page + 1
+    next_page_text = " >>"
+    markup = InlineKeyboardMarkup()
+    if previous_page > 0:
+        markup.insert(InlineKeyboardButton
+                      (text=previous_page_text,
+                       callback_data=pagination_call.new(key=k, page=previous_page))
+                      )
+    markup.insert(InlineKeyboardButton
+                  (text=current_page_text,
+                   callback_data=pagination_call.new(key=k, page="current_page")
+                   )
+                  )
+    if page < max:
+        markup.insert(InlineKeyboardButton
+                      (text=next_page_text,
+                       callback_data=pagination_call.new(key=k, page=next_page)
+                       )
+                      )
+    if previous_page > 0:
+        markup.insert(InlineKeyboardButton
+                      (text="начало",
+                       callback_data=pagination_call.new(key=k, page=1))
+                      )
+
+    return markup

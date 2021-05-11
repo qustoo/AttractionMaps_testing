@@ -3,10 +3,7 @@ from typing import List, Any, Coroutine
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Command
 
-from data.checking_answers_medium_level import check_answer_medium_1, check_answer_medium_2, check_answer_medium_3, \
-    check_answer_medium_4, check_answer_medium_5, check_answer_medium_6, check_answer_medium_7, check_answer_medium_8, \
-    check_answer_medium_9, check_answer_medium_10, check_answer_medium_11, check_answer_medium_12, \
-    check_answer_medium_13, check_answer_medium
+from data.checking_answers_medium_level import check_answer_medium
 from quiz_all_files.Quiz_Questions.questions_quiz import Medium_Array_Questions
 from loader import dp, photo_db
 from aiogram import types
@@ -191,20 +188,6 @@ async def answer_test_1(message: types.Message, state: FSMContext):
 
     for i in range(len(data)+1):
         checked.append(await check_answer_medium(message, data.get("answer" + str(i+1)), i+1))
-
-    # checked.append(await check_answer_medium_1(message, data.get("answer1")))
-    # checked.append(await check_answer_medium_2(message, data.get("answer2")))
-    # checked.append(await check_answer_medium_3(message, data.get("answer3")))
-    # checked.append(await check_answer_medium_4(message, data.get("answer4")))
-    # checked.append(await check_answer_medium_5(message, data.get("answer5")))
-    # checked.append(await check_answer_medium_6(message, data.get("answer6")))
-    # checked.append(await check_answer_medium_7(message, data.get("answer7")))
-    # checked.append(await check_answer_medium_8(message, data.get("answer8")))
-    # checked.append(await check_answer_medium_9(message, data.get("answer9")))
-    # checked.append(await check_answer_medium_10(message, data.get("answer10")))
-    # checked.append(await check_answer_medium_11(message, data.get("answer11")))
-    # checked.append(await check_answer_medium_12(message, data.get("answer12")))
-    # checked.append(await check_answer_medium_13(message, message.text))
 
     await message.answer('\n'.join(checked))
     await state.finish()
