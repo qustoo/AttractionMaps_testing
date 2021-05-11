@@ -54,7 +54,11 @@ def choose_nearest(lat, lon, List_Attractions, name_object):
     distances = list()
     for place_name, place_location in List_Attractions:
         # Если обход по локации True
-        if place_location['bypass'] and re.search(name_object, place_name, re.IGNORECASE) is not None:
+        if name_object == "AnyOne":
+            result = True
+        else:
+            result = re.search(name_object, place_name, re.IGNORECASE)
+        if place_location['bypass'] and result is not None:
             distances.append((place_name,
                               calc_distance(lat, lon,
                                             place_location["lat"],
