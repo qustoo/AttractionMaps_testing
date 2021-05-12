@@ -21,11 +21,6 @@ async def enter_easy_test(message: types.Message):
     await message.answer("Вопрос 1:\n"+Easy_Array_Questions[0], reply_markup=quiz_keyboard1)
     await QuizEasy.Q1.set()
 
-# @dp.callback_query_handler(quiz_photo_callback.filter(next="p1"),state=QuizEasy.Q1)
-# async def question_1(call: CallbackQuery):
-#     await call.answer(cache_time=60)
-#     await call.message.edit_reply_markup(reply_markup=quiz_photo2)
-
 
 @dp.callback_query_handler(quiz_callback.filter(next="2"), state=QuizEasy.Q1)
 async def question_1(call: CallbackQuery, state: FSMContext,callback_data: dict):
@@ -34,7 +29,6 @@ async def question_1(call: CallbackQuery, state: FSMContext,callback_data: dict)
     answer1 = callback_data.get('answer')
     await state.update_data(answer1=answer1)
     await call.message.edit_text(text ="Вопрос 2:\n"+Easy_Array_Questions[1],reply_markup=quiz_keyboard2)
-    # await call.message.answer_photo(photo=open(photo_db.get_one_file_name(name='easy_question_1'), 'rb'))
     await QuizEasy.Q2.set()
 
 @dp.callback_query_handler(quiz_callback.filter(next="3"), state=QuizEasy.Q2)
@@ -216,7 +210,7 @@ async def finish_test(message: types.Message, state: FSMContext):
     await message.answer("Ваши ответы:")
 
     Answer_List_Question_Easy = [answer_first, answer_second, answer_third, answer_fourth, answer_5th, answer_6th,
-                                 answer_7th, answer_8th, answer_9th, answer_10th]
+                                  answer_7th, answer_8th, answer_9th, answer_10th]
 
     for index in range(0, 10):
         if (Answer_List_Question_Easy[index] == Right_Answer_List_Question_Easy[index]):
