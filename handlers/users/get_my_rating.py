@@ -24,6 +24,6 @@ async def view_rating_user(message: types.Message):
 
     output_string = ""
     for user in sorted_user_rating:
-        output_string += "Рейтинг пользователя " + user + ": " + str(sorted_user_rating[user])
+        output_string += "Рейтинг пользователя " + user + ": " + str(sorted_user_rating[user]) + str("\n")
     await message.answer(output_string)
 
