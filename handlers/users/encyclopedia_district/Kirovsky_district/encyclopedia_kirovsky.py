@@ -27,7 +27,6 @@ async def show_current_page(call: CallbackQuery, callback_data: dict):
     photo = get_page(array=Kirovsky_photo, page=current_page)
     media = InputMediaPhoto(media=open(photo_db.get_one_file_name(name=photo), 'rb'))
     markup = get_page_keyboard(k="kir", max=max_kir_photo, page=current_page)
-
     await call.message.edit_media(media=media, reply_markup=markup)
 
 
