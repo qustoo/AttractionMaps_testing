@@ -219,7 +219,6 @@ async def finish_test(message: types.Message, state: FSMContext):
             db.update_rating(id=message.from_user.id, rating=RATE + 1.0)
         else:
             await message.answer(text=f'Вопрос {index + 1}:Неправильный ответ!')
-    # await message.answer('\n'.join(list_answer))
     await message.answer("Чтобы увидеть свой рейтинг, после прохождения викторины нажмите /get_my_rating")
 
     await state.finish()
