@@ -3,13 +3,13 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Command
 from aiogram.types import ReplyKeyboardRemove
 
-from keyboards.default.locations_for_button import save_location
+from keyboards.default.KeyboardsToSendLocations import SaveFirstLocationsInDataBase
 from loader import dp, db
 
 
 @dp.message_handler(Command("save_my_location"))
 async def save_first_time_location(message: types.Message, state: FSMContext):
-    await message.answer("Нам требуется сохранить вашу локацию, нажмите на кнопку ниже", reply_markup=save_location)
+    await message.answer("Нам требуется сохранить вашу локацию, нажмите на кнопку ниже", reply_markup=SaveFirstLocationsInDataBase)
     await state.set_state("save_rate")
 
 
