@@ -1,7 +1,7 @@
 from aiogram import types
 from loader import db
 
-Answer_List_Question_Easy = [
+ListCorrectAnswersEasyLevel = [
     "Георгия Победоносца",
     "космический спускаемый аппарат - Союз ТМА-10",
     "Великой Отечественной войне",
@@ -17,7 +17,7 @@ Answer_List_Question_Easy = [
 
 async def check_answer_easy(message: types.Message, str_ans, num):
 
-    if str_ans == Answer_List_Question_Easy[num - 1]:
+    if str_ans == ListCorrectAnswersEasyLevel[num - 1]:
         RATE = db.select_user(id=message.from_user.id)[-1]
         db.update_rating(id=message.from_user.id, rating=RATE + 3.0)
         return "Вопрос " + str(num) + ": Правильный ответ !"
