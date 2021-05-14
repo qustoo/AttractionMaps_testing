@@ -23,13 +23,15 @@ ListPatternsRegexMediumLevel = [
 
 
 async def check_answer_medium(message: types.Message, answers):
+    # Обнуляем рейтинг
+    db.update_rating_medium(message.from_user.id, 0);
     # assert (len(answers) == len(ListPatternsRegexHardLevel))
     res = ""
     for i in range(0, len(answers)):
         if re.search(ListPatternsRegexMediumLevel[i], answers[i], re.IGNORECASE) is not None:
             res += hbold(f"Правильный ответ : {int(i) + 1}\n")
-            RATE = db.select_user(id=message.from_user.id)[-1]
-            db.update_rating(id=message.from_user.id, rating=RATE + 3.0)
+            rate = db.get_rating_medium(message.from_user.id)
+            db.update_rating_medium(id=message.from_user.id, rating=rate + 3.0)
         else:
             res += f"Неправильный ответ : {int(i) + 1}\n"
     return res

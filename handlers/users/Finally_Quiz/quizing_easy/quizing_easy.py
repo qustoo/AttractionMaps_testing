@@ -17,6 +17,7 @@ from states.MachineStates_For_Quiz import QuizEasy
 
 @dp.message_handler(Command("quiz_easy"), state=None)
 async def enter_easy_test(message: types.Message):
+
     # присылаем фотку и клаву
     await message.answer_photo(photo=open(photo_db.get_one_file_name(name=photo_quiz[0]), 'rb'),
                                reply_markup=quiz_photo1)
@@ -176,11 +177,14 @@ async def finish_test(message: types.Message, state: FSMContext):
     Answer_List_Question_Easy = [answer_first, answer_second, answer_third, answer_fourth, answer_5th, answer_6th,
                                  answer_7th, answer_8th, answer_9th, answer_10th]
 
+    # Обнуляем рейтинг
+    db.update_rating_easy(message.from_user.id, 0);
+
     for index in range(0, 10):
         if (Answer_List_Question_Easy[index] == Right_Answer_List_Question_Easy[index]):
             await message.answer(text=f'Вопрос {index + 1}:Правильный ответ!')
-            RATE = db.select_user(id=message.from_user.id)[-1]
-            db.update_rating(id=message.from_user.id, rating=RATE + 1.0)
+            rate = db.get_rating_easy(message.from_user.id)
+            db.update_rating_easy(id=message.from_user.id, rating=rate + 1.0)
         else:
             await message.answer(text=f'Вопрос {index + 1}:Неправильный ответ!')
     await message.answer("Чтобы увидеть свой рейтинг, после прохождения викторины нажмите /get_my_rating")

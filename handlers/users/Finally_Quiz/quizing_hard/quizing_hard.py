@@ -1,10 +1,7 @@
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Command
 
-from data.checking_answers_hard_level import check_answer_hard_1, check_answer_hard_2, check_answer_hard_3, \
-    check_answer_hard_4, check_answer_hard_5, check_answer_hard_6, check_answer_hard_7, check_answer_hard_8, \
-    check_answer_hard_9, check_answer_hard_10, check_answer_hard_11, check_answer_hard_12, check_answer_hard_13, \
-    check_answer_hard_14, check_answer_hard_15, check_answer_hard
+from data.checking_answers_hard_level import check_answer_hard
 
 from quiz_all_files.Quiz_Questions.questions_quiz import Hard_Array_Questions
 from loader import dp, photo_db

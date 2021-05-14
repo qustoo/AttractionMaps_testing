@@ -6,7 +6,7 @@ from loader import dp, db
 
 @dp.message_handler(Command("get_my_rating"))
 async def get_my_rating(message: types.Message):
-    rate = db.select_user(id=message.from_user.id)[-1]
+    rate = db.get_rating_total(message.from_user.id)
     await message.answer("Ваш рейтинг: " + str(rate))
 
 

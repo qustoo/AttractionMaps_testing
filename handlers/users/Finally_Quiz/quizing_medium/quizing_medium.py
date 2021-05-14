@@ -15,6 +15,7 @@ user_answers = []
 
 @dp.message_handler(Command("quiz_medium"), state=None)
 async def enter_easy_test(message: types.Message):
+
     # присылаем фотку и клаву
     await message.answer_photo(photo=open(photo_db.get_one_file_name(name='medium_question_1'), 'rb'))
     await message.answer("Вопрос 1:\n" + Medium_Array_Questions[0])
