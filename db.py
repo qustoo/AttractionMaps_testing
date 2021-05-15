@@ -10,6 +10,9 @@ def do_db_photo(data_base_photo):
     data_base_photo.add_photo(r'quiz_all_files/Quiz_Photos/Easy_Photos/easy_question_8.jpg', "easy_question_8")
     data_base_photo.add_photo(r'quiz_all_files/Quiz_Photos/Easy_Photos/easy_question_9.jpg', "easy_question_9")
     data_base_photo.add_photo(r'quiz_all_files/Quiz_Photos/Easy_Photos/easy_question_10.jpg', "easy_question_10")
+    data_base_photo.add_photo(r'quiz_all_files/Quiz_Photos/Easy_Photos/easy_question_11.jpg', "easy_question_11")
+    data_base_photo.add_photo(r'quiz_all_files/Quiz_Photos/Easy_Photos/easy_question_12.jpg', "easy_question_12")
+    data_base_photo.add_photo(r'quiz_all_files/Quiz_Photos/Easy_Photos/easy_question_13.jpg', "easy_question_13")
     # средний уровень сложности
     data_base_photo.add_photo(r'quiz_all_files/Quiz_Photos/Medium_Photos/medium_question_1.jpg', "medium_question_1")
     data_base_photo.add_photo(r'quiz_all_files/Quiz_Photos/Medium_Photos/medium_question_2.jpg', "medium_question_2")

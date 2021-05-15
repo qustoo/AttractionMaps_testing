@@ -167,3 +167,51 @@ menu_9 = ReplyKeyboardMarkup(
     ],
     # чтобы размер был нормальным, клава не занимала пол-экрана
     resize_keyboard=True)
+menu_10 = ReplyKeyboardMarkup(
+    keyboard=[
+        [
+            KeyboardButton(text="Свято-казанский")
+        ],
+        [
+            KeyboardButton(text="Иоанна Воина")
+
+        ],
+        [
+            KeyboardButton(text="Иоанна Кронштадтского")
+        ],
+
+    ],
+    # чтобы размер был нормальным, клава не занимала пол-экрана
+    resize_keyboard=True)
+menu_11 = ReplyKeyboardMarkup(
+    keyboard=[
+        [
+            KeyboardButton(text="1983")
+        ],
+        [
+            KeyboardButton(text="1967")
+
+        ],
+        [
+            KeyboardButton(text="1958")
+        ],
+
+    ],
+    # чтобы размер был нормальным, клава не занимала пол-экрана
+    resize_keyboard=True)
+menu_12 = ReplyKeyboardMarkup(
+    keyboard=[
+        [
+            KeyboardButton(text="Доходный дом Параманова")
+        ],
+        [
+            KeyboardButton(text="Особняк Великановой")
+
+        ],
+        [
+            KeyboardButton(text="Доходный дом Антимонова")
+        ],
+
+    ],
+    # чтобы размер был нормальным, клава не занимала пол-экрана
+    resize_keyboard=True)

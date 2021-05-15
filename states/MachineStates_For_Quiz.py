@@ -13,6 +13,9 @@ class QuizEasy(StatesGroup):
     Q9 = State()
     Q10 = State()
     Q11 = State()
+    Q12 = State()
+    Q13 = State()
+    Q14 = State()
 
 
 class QuizMedium(StatesGroup):

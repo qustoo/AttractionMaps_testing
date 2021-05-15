@@ -168,17 +168,68 @@ async def answer_test_6(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=QuizEasy.Q10)
-async def answer_test_7(message: types.Message, state: FSMContext):
+async def answer_test_6(message: types.Message, state: FSMContext):
     # сохраняем и пишем данные
     answer_10th = message.text
     await state.update_data(answer10=answer_10th)
+
     # Закрываем и отправляем клаву
-    await message.answer(text="Спасибо за ваши ответы\n Чтобы закончить викторину нажмите /finish"
-                         , reply_markup=ReplyKeyboardRemove())
+
+    await message.answer(text="Вопрос 11:\n", reply_markup=ReplyKeyboardRemove())
+
+    # отправляем новую фотку + вопрос + новую клаву
+    await message.answer_photo(photo=open(photo_db.get_one_file_name(name='easy_question_11'), 'rb'))
+    await message.answer(Easy_Array_Questions[10], reply_markup=menu_for_easy_quizing.menu_10)
+
     await QuizEasy.Q11.set()
 
 
-@dp.message_handler(Command("finish"), state=QuizEasy.Q11)
+@dp.message_handler(state=QuizEasy.Q11)
+async def answer_test_6(message: types.Message, state: FSMContext):
+    # сохраняем и пишем данные
+    answer_11th = message.text
+    await state.update_data(answer11=answer_11th)
+
+    # Закрываем и отправляем клаву
+
+    await message.answer(text="Вопрос 12:\n", reply_markup=ReplyKeyboardRemove())
+
+    # отправляем новую фотку + вопрос + новую клаву
+    await message.answer_photo(photo=open(photo_db.get_one_file_name(name='easy_question_12'), 'rb'))
+    await message.answer(Easy_Array_Questions[11], reply_markup=menu_for_easy_quizing.menu_11)
+
+    await QuizEasy.Q12.set()
+
+
+@dp.message_handler(state=QuizEasy.Q12)
+async def answer_test_6(message: types.Message, state: FSMContext):
+    # сохраняем и пишем данные
+    answer_12th = message.text
+    await state.update_data(answer12=answer_12th)
+
+    # Закрываем и отправляем клаву
+
+    await message.answer(text="Вопрос 13:\n", reply_markup=ReplyKeyboardRemove())
+
+    # отправляем новую фотку + вопрос + новую клаву
+    await message.answer_photo(photo=open(photo_db.get_one_file_name(name='easy_question_13'), 'rb'))
+    await message.answer(Easy_Array_Questions[12], reply_markup=menu_for_easy_quizing.menu_12)
+
+    await QuizEasy.Q13.set()
+
+
+@dp.message_handler(state=QuizEasy.Q13)
+async def answer_test_7(message: types.Message, state: FSMContext):
+    # сохраняем и пишем данные
+    answer_13th = message.text
+    await state.update_data(answer13=answer_13th)
+    # Закрываем и отправляем клаву
+    await message.answer(text="Спасибо за ваши ответы\n Чтобы закончить викторину нажмите /finish"
+                         , reply_markup=ReplyKeyboardRemove())
+    await QuizEasy.Q14.set()
+
+
+@dp.message_handler(Command("finish"), state=QuizEasy.Q14)
 async def finish_test(message: types.Message, state: FSMContext):
     # получаем все данные
     data = await state.get_data()
