@@ -1,15 +1,5 @@
-Voroshil_photo1=[
-"encyclopedia_voroshilovsky_guestion_1","encyclopedia_voroshilovsky_guestion_6"
+Voroshil_photo=[
+"encyclopedia_voroshilovsky_guestion_1","encyclopedia_voroshilovsky_guestion_2","encyclopedia_voroshilovsky_guestion_3","encyclopedia_voroshilovsky_guestion_4","encyclopedia_voroshilovsky_guestion_5",
+    "encyclopedia_voroshilovsky_guestion_6",
 ]
-Voroshil_photo2=[
-"encyclopedia_voroshilovsky_guestion_2"
-]
-Voroshil_photo3=[
-"encyclopedia_voroshilovsky_guestion_3"
-]
-Voroshil_photo4=[
-"encyclopedia_voroshilovsky_guestion_4"
-]
-Voroshil_photo5=[
-"encyclopedia_voroshilovsky_guestion_5"
-]
+max_vor=len(Voroshil_photo)

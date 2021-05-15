@@ -12,7 +12,7 @@ from aiogram import types
 
 from states.MachineStates_For_Quiz import QuizHard
 
-User_answers = []
+user_answers = []
 
 
 @dp.message_handler(Command("quiz_hard"), state=None)
@@ -27,20 +27,20 @@ async def enter_hard_test(message: types.Message):
 async def answer_test_1(message: types.Message, state: FSMContext):
     # сохраняем и пишем данные
     answer_first_hard = message.text
-    User_answers.append(message.text)
+    user_answers.append(message.text)
     await state.update_data(answer1=answer_first_hard)
 
     # отправляем новую фотку + вопрос
     await message.answer_photo(photo=open(photo_db.get_one_file_name(name='hard_question_2'), 'rb'))
     await message.answer("Вопрос 2:\n" + Hard_Array_Questions[1])
-    await QuizHard.Q2.set()
+    await QuizHard.Q15.set()
 
 
 @dp.message_handler(state=QuizHard.Q2)
 async def answer_test_1(message: types.Message, state: FSMContext):
     # сохраняем и пишем данные
     answer_2nd_hard = message.text
-    User_answers.append(message.text)
+    user_answers.append(message.text)
     await state.update_data(answer2=answer_2nd_hard)
 
     # отправляем новую фотку + вопрос
@@ -53,7 +53,7 @@ async def answer_test_1(message: types.Message, state: FSMContext):
 async def answer_test_1(message: types.Message, state: FSMContext):
     # сохраняем и пишем данные
     answer_3rd_hard = message.text
-    User_answers.append(message.text)
+    user_answers.append(message.text)
     await state.update_data(answer3=answer_3rd_hard)
 
     # отправляем новую фотку + вопрос
@@ -66,7 +66,7 @@ async def answer_test_1(message: types.Message, state: FSMContext):
 async def answer_test_1(message: types.Message, state: FSMContext):
     # сохраняем и пишем данные
     answer_4th_hard = message.text
-    User_answers.append(message.text)
+    user_answers.append(message.text)
     await state.update_data(answer4=answer_4th_hard)
 
     # отправляем новую фотку + вопрос
@@ -79,7 +79,7 @@ async def answer_test_1(message: types.Message, state: FSMContext):
 async def answer_test_1(message: types.Message, state: FSMContext):
     # сохраняем и пишем данные
     answer_5th_hard = message.text
-    User_answers.append(message.text)
+    user_answers.append(message.text)
     await state.update_data(answer5=answer_5th_hard)
 
     # отправляем новую фотку + вопрос
@@ -92,7 +92,7 @@ async def answer_test_1(message: types.Message, state: FSMContext):
 async def answer_test_1(message: types.Message, state: FSMContext):
     # сохраняем и пишем данные
     answer_6th_hard = message.text
-    User_answers.append(message.text)
+    user_answers.append(message.text)
     await state.update_data(answer6=answer_6th_hard)
 
     # отправляем новую фотку + вопрос
@@ -105,7 +105,7 @@ async def answer_test_1(message: types.Message, state: FSMContext):
 async def answer_test_1(message: types.Message, state: FSMContext):
     # сохраняем и пишем данные
     answer_7th_hard = message.text
-    User_answers.append(message.text)
+    user_answers.append(message.text)
     await state.update_data(answer7=answer_7th_hard)
 
     # отправляем новую фотку + вопрос
@@ -118,7 +118,7 @@ async def answer_test_1(message: types.Message, state: FSMContext):
 async def answer_test_1(message: types.Message, state: FSMContext):
     # сохраняем и пишем данные
     answer_8th_hard = message.text
-    User_answers.append(message.text)
+    user_answers.append(message.text)
     await state.update_data(answer8=answer_8th_hard)
 
     # отправляем новую фотку + вопрос
@@ -131,7 +131,7 @@ async def answer_test_1(message: types.Message, state: FSMContext):
 async def answer_test_1(message: types.Message, state: FSMContext):
     # сохраняем и пишем данные
     answer_9th_hard = message.text
-    User_answers.append(message.text)
+    user_answers.append(message.text)
     await state.update_data(answer9=answer_9th_hard)
 
     # отправляем новую фотку + вопрос
@@ -144,7 +144,7 @@ async def answer_test_1(message: types.Message, state: FSMContext):
 async def answer_test_1(message: types.Message, state: FSMContext):
     # сохраняем и пишем данные
     answer_10th_hard = message.text
-    User_answers.append(message.text)
+    user_answers.append(message.text)
     await state.update_data(answer10=answer_10th_hard)
 
     # отправляем новую фотку + вопрос
@@ -157,7 +157,7 @@ async def answer_test_1(message: types.Message, state: FSMContext):
 async def answer_test_1(message: types.Message, state: FSMContext):
     # сохраняем и пишем данные
     answer_11th_hard = message.text
-    User_answers.append(message.text)
+    user_answers.append(message.text)
     await state.update_data(answer11=answer_11th_hard)
 
     # отправляем новую фотку + вопрос
@@ -170,7 +170,7 @@ async def answer_test_1(message: types.Message, state: FSMContext):
 async def answer_test_1(message: types.Message, state: FSMContext):
     # сохраняем и пишем данные
     answer_12th_hard = message.text
-    User_answers.append(message.text)
+    user_answers.append(message.text)
     await state.update_data(answer12=answer_12th_hard)
 
     # отправляем новую фотку + вопрос
@@ -182,9 +182,9 @@ async def answer_test_1(message: types.Message, state: FSMContext):
 @dp.message_handler(state=QuizHard.Q13)
 async def answer_test_1(message: types.Message, state: FSMContext):
     # сохраняем и пишем данные
-    answer_13th_hard = message.text
-    User_answers.append(message.text)
-    await state.update_data(answer13=answer_13th_hard)
+    answer_11th_hard = message.text
+    user_answers.append(message.text)
+    await state.update_data(answer13=answer_11th_hard)
 
     # отправляем новую фотку + вопрос
     await message.answer_photo(photo=open(photo_db.get_one_file_name(name='hard_question_14'), 'rb'))
@@ -195,9 +195,9 @@ async def answer_test_1(message: types.Message, state: FSMContext):
 @dp.message_handler(state=QuizHard.Q14)
 async def answer_test_1(message: types.Message, state: FSMContext):
     # сохраняем и пишем данные
-    answer_14th_hard = message.text
-    User_answers.append(message.text)
-    await state.update_data(answer14=answer_14th_hard)
+    answer_11th_hard = message.text
+    user_answers.append(message.text)
+    await state.update_data(answer14=answer_11th_hard)
 
     # отправляем новую фотку + вопрос
     await message.answer_photo(photo=open(photo_db.get_one_file_name(name='hard_question_15'), 'rb'))
@@ -208,11 +208,8 @@ async def answer_test_1(message: types.Message, state: FSMContext):
 @dp.message_handler(state=QuizHard.Q15)
 async def answer_test_1(message: types.Message, state: FSMContext):
     # сохраняем последний ответ
-    User_answers.append(message.text)
+    user_answers.append(message.text)
     await state.update_data(answer15=message.text)
-    # сохраняем и пишем данные
-    data = await state.get_data()
-
-    hard_answers = await check_answer_hard(message, User_answers)
-    await message.answer(hard_answers)
+    total_answers = await check_answer_hard(message, user_answers)
+    await message.answer(total_answers)
     await state.finish()
