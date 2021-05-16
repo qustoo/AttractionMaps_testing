@@ -5,7 +5,6 @@ from aiogram.dispatcher.filters import Command
 from aiogram.types import ReplyKeyboardRemove
 from aiogram.utils.markdown import hitalic, hbold
 
-
 from handlers.users.get_my_rating import get_my_rating
 from keyboards.inline.quiz_keyboard import YesOrNoFinishKeyboard
 from quiz_all_files.Quiz_Questions.questions_quiz import Hard_Array_Questions
@@ -258,6 +257,10 @@ async def check_answers_finish(message: types.Message, state: FSMContext):
                                     answer_8th,
                                     answer_9th, answer_10th, answer_11th, answer_12th, answer_13th, answer_14th,
                                     answer_15th]
+
+    # Обнуляем рейтинг
+    db.update_rating_hard(message.from_user.id, 0)
+
     result_str = ""
     for i in range(0, len(ListAnswersFromUserHardLevel)):
         if re.search(ListPatternsRegexHardLevel[i], str(ListAnswersFromUserHardLevel[i]), re.IGNORECASE) is not None:
@@ -274,11 +277,13 @@ async def check_answers_finish(message: types.Message, state: FSMContext):
     await message.answer(text="Хотите увидеть свой рейтинг?", reply_markup=YesOrNoFinishKeyboard)
     await YesOrNoFinishShowRating.Q1.set()
 
+
 @dp.message_handler(text="Да", state=YesOrNoFinishShowRating.Q1)
 async def YesShowRating(message: types.message, state: FSMContext):
     await get_my_rating(message)
     await message.answer(text="Спасибо за прохождение викторины", reply_markup=ReplyKeyboardRemove())
     await state.finish()
+
 
 @dp.message_handler(text="Нет", state=YesOrNoFinishShowRating.Q1)
 async def YesShowRating(message: types.message, state: FSMContext):

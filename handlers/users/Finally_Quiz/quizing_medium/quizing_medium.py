@@ -195,7 +195,8 @@ async def finish_test(message: types.Message, state: FSMContext):
                             answer_7th, answer_8th, answer_9th, answer_10th]
 
     # Обнуляем рейтинг
-    await db.update_rating_easy(message.from_user.id, 0)
+    # postgresql : await db.update_rating_easy(message.from_user.id, 0)
+    db.update_rating_easy(message.from_user.id, 0)
 
     result_str = ""
     for index in range(0, 10):

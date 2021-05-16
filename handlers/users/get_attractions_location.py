@@ -9,13 +9,7 @@ from keyboards.default import KeyboardsToSendLocations
 from keyboards.default.KeyboardsToSendLocations import TypeObject, NextOrFinishProgressMap, SelectTypeAttractions, \
     NextOrFinishLocationKeyboard
 from loader import dp, db
-from utils.misc.calc_for_distance import choose_nearest
-
-
-
-
-
-
+from utils.misc.calc_for_distance import choose_nearest, SetTrueForAllAttractions
 
 # Заносим кнопки в локальное пространство имен
 global_buttons = [SelectTypeAttractions.inline_keyboard[0],
@@ -26,6 +20,13 @@ global_buttons = [SelectTypeAttractions.inline_keyboard[0],
                   SelectTypeAttractions.inline_keyboard[5],
                   SelectTypeAttractions.inline_keyboard[6]
                   ]
+
+
+# Устанавливаем в каждом месте обход - True
+@dp.message_handler(Command("reset_map"))
+async def reset_map(message: types.Message):
+    SetTrueForAllAttractions(Attractions)
+    await message.answer(text=f'Карта была успешно сброшена.\n')
 
 
 # метод нахождения индекса кнопки и её удаление
@@ -309,11 +310,12 @@ async def next_place(call: CallbackQuery, callback_data: dict, state: FSMContext
     data = await state.get_data()
     user = db.select_user(id=call.from_user.id)
     # получаем координаты из БД
-    new_lat, new_lon = db.get_coordinates(id=call.from_user.id)
+    new_lat, new_lon = await db.get_coordinates(id=call.from_user.id)
     closes_places = choose_nearest(new_lat, new_lon, Attractions, name_object=data.get('lastLocations'))
     if not closes_places:
         await call.message.edit_text(text='Список мест для посещения закончилось!\n')
         await call.message.edit_reply_markup()
+        await call.message.answer(text="Чтобы сбросить карту нажмите /")
         return
 
     await SendToUserLocationUpdateDataBase(closes_places, call)
