@@ -16,7 +16,7 @@ async def view_rating_user(message: types.Message):
     print(len(users))
     tmp_user_rating = {}
     for i in users:
-        tmp_user_rating[i[1]] = i[-1]
+        tmp_user_rating[i[1]] = db.get_rating_total(i[1])
     sorted_user_rating = {}
     sorted_users = sorted(tmp_user_rating, key=tmp_user_rating.get, reverse=True)
     for w in sorted_users:
