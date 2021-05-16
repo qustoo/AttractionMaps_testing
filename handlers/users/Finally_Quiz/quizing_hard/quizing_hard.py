@@ -76,8 +76,7 @@ async def answer_test_1(message: types.Message, state: FSMContext):
     await state.update_data(answer2=answer_2nd_hard)
 
     # отправляем новую фотку + вопрос
-    await message.edit_media(
-        media=types.InputMediaPhoto(photo=open(photo_db.get_one_file_name(name='hard_question_3'), 'rb')))
+    await message.answer_photo(photo=open(photo_db.get_one_file_name(name='hard_question_3'), 'rb'))
     await message.answer("Вопрос 3:\n" + Hard_Array_Questions[2])
     await QuizHard.Q3.set()
 
