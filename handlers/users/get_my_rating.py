@@ -23,7 +23,10 @@ async def view_rating_user(message: types.Message):
         sorted_user_rating[w] = tmp_user_rating[w]
 
     output_string = ""
+    counter = 0
     for user in sorted_user_rating:
-        output_string += "Рейтинг пользователя " + user + ": " + str(sorted_user_rating[user]) + str("\n")
+        if counter < 20:
+            output_string += "Рейтинг пользователя " + user + ": " + str(sorted_user_rating[user]) + str("\n")
+        counter += 1
     await message.answer(output_string)
 
