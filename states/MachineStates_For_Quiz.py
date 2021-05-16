@@ -29,6 +29,7 @@ class QuizMedium(StatesGroup):
     Q11 = State()
     Q12 = State()
     Q13 = State()
+    Q14 = State()
 
 
 class QuizHard(StatesGroup):

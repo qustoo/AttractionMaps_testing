@@ -14,6 +14,7 @@ from aiogram import types
 from states.MachineStates_For_Quiz import QuizEasy
 
 
+
 @dp.message_handler(Command("quiz_easy"), state=None)
 async def enter_easy_test(message: types.Message):
 
@@ -31,7 +32,6 @@ async def question_1(call: CallbackQuery, state: FSMContext, callback_data: dict
     answer1 = callback_data.get('answer')
     await state.update_data(answer1=answer1)
     await call.message.edit_text(text= "<b>Вопрос 2:</b>\n" + Easy_Array_Questions[1], reply_markup=quiz_keyboard2)
-    # await call.message.answer_photo(photo=open(photo_db.get_one_file_name(name='easy_question_1'), 'rb'))
     await QuizEasy.Q2.set()
 
 
@@ -112,7 +112,7 @@ async def question_1(call: CallbackQuery, state: FSMContext, callback_data: dict
     await call.answer(cache_time=60)
     answer10 = callback_data.get('answer')
     await state.update_data(answer10=answer10)
-    await call.message.edit_text(text="Спасибо за ваши ответы\n Чтобы закончить викторину нажмите /finish",
+    await call.message.edit_text(text="Спасибо за ваши ответы\n Чтобы закончить викторину нажмите /finish_easy",
                                  reply_markup=None)
     await QuizEasy.Q11.set()
 
@@ -129,7 +129,7 @@ async def question_1(call: CallbackQuery, state: FSMContext, callback_data: dict
 @dp.callback_query_handler(quiz_callback.filter(answer="End"), state=QuizEasy.Q9)
 @dp.callback_query_handler(quiz_callback.filter(answer="End"), state=QuizEasy.Q10)
 async def cancel_quiz(call: CallbackQuery):
-    await call.message.edit_text(text="Спасибо за ваши ответы\n Чтобы закончить викторину нажмите /finish")
+    await call.message.edit_text(text="Спасибо за ваши ответы\n Чтобы закончить викторину нажмите /finish_easy")
     # Отправляем пустую клавиатуру, т.е. выходит из клавиатуры
     await QuizEasy.Q11.set()
     await call.message.edit_reply_markup(reply_markup=None)
@@ -150,7 +150,7 @@ Right_Answer_List_Question_Easy = [
 ]
 
 
-@dp.message_handler(Command("finish"), state=QuizEasy.Q11)
+@dp.message_handler(Command("finish_easy"), state=QuizEasy.Q11)
 async def finish_test(message: types.Message, state: FSMContext):
     # # получаем все данные
     data = await state.get_data()
