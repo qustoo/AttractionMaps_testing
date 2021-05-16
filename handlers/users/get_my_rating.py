@@ -16,14 +16,17 @@ async def view_rating_user(message: types.Message):
     print(len(users))
     tmp_user_rating = {}
     for i in users:
-        tmp_user_rating[i[1]] = i[-1]
+        tmp_user_rating[i[1]] = db.get_rating_total(i[0])
     sorted_user_rating = {}
     sorted_users = sorted(tmp_user_rating, key=tmp_user_rating.get, reverse=True)
     for w in sorted_users:
         sorted_user_rating[w] = tmp_user_rating[w]
 
     output_string = ""
+    counter = 0
     for user in sorted_user_rating:
-        output_string += "Рейтинг пользователя " + user + ": " + str(sorted_user_rating[user]) + str("\n")
+        if counter < 20:
+            output_string += "Рейтинг пользователя " + user + ": " + str(sorted_user_rating[user]) + str("\n")
+        counter += 1
     await message.answer(output_string)
 

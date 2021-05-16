@@ -102,6 +102,9 @@ def do_db_photo(data_base_photo):
     data_base_photo.add_photo(
         r'encyclopedia_all_files/Encyclopedia_District/Kirovsky_region/Photo/encyclopedia_kirovsky_guestion_20.jpg',
         'encyclopedia_kirovsky_guestion_20')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Kirovsky_region/Photo/encyclopedia_kirovsky_guestion_21.jpg',
+        'encyclopedia_kirovsky_guestion_21')
 
     # Ленинский район
     data_base_photo.add_photo(
@@ -158,6 +161,36 @@ def do_db_photo(data_base_photo):
     data_base_photo.add_photo(
         r'encyclopedia_all_files/Encyclopedia_District/Leninsky_region/Photo/encyclopedia_leninsky_guestion_18.jpg',
         'encyclopedia_leninsky_guestion_18')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Leninsky_region/Photo/encyclopedia_leninsky_guestion_19.jpg',
+        'encyclopedia_leninsky_guestion_19')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Leninsky_region/Photo/encyclopedia_leninsky_guestion_20.jpg',
+        'encyclopedia_leninsky_guestion_20')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Leninsky_region/Photo/encyclopedia_leninsky_guestion_21.jpg',
+        'encyclopedia_leninsky_guestion_21')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Leninsky_region/Photo/encyclopedia_leninsky_guestion_22.jpg',
+        'encyclopedia_leninsky_guestion_22')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Leninsky_region/Photo/encyclopedia_leninsky_guestion_23.jpg',
+        'encyclopedia_leninsky_guestion_23')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Leninsky_region/Photo/encyclopedia_leninsky_guestion_24.jpg',
+        'encyclopedia_leninsky_guestion_24')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Leninsky_region/Photo/encyclopedia_leninsky_guestion_25.jpg',
+        'encyclopedia_leninsky_guestion_25')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Leninsky_region/Photo/encyclopedia_leninsky_guestion_26.jpg',
+        'encyclopedia_leninsky_guestion_26')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Leninsky_region/Photo/encyclopedia_leninsky_guestion_27.jpg',
+        'encyclopedia_leninsky_guestion_27')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Leninsky_region/Photo/encyclopedia_leninsky_guestion_28.jpg',
+        'encyclopedia_leninsky_guestion_28')
 
 
     # первомайский район
@@ -191,6 +224,27 @@ def do_db_photo(data_base_photo):
     data_base_photo.add_photo(
         r'encyclopedia_all_files/Encyclopedia_District/MayDay_region/Photos/encyclopedia_mayday_guestion_10.jpg',
         'encyclopedia_mayday_guestion_10')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/MayDay_region/Photos/encyclopedia_mayday_guestion_11.jpg',
+        'encyclopedia_mayday_guestion_11')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/MayDay_region/Photos/encyclopedia_mayday_guestion_12.jpg',
+        'encyclopedia_mayday_guestion_12')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/MayDay_region/Photos/encyclopedia_mayday_guestion_13.jpg',
+        'encyclopedia_mayday_guestion_13')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/MayDay_region/Photos/encyclopedia_mayday_guestion_14.jpg',
+        'encyclopedia_mayday_guestion_14')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/MayDay_region/Photos/encyclopedia_mayday_guestion_15.jpg',
+        'encyclopedia_mayday_guestion_15')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/MayDay_region/Photos/encyclopedia_mayday_guestion_16.jpg',
+        'encyclopedia_mayday_guestion_16')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/MayDay_region/Photos/encyclopedia_mayday_guestion_17.jpg',
+        'encyclopedia_mayday_guestion_17')
 
     # октябрьский район
     data_base_photo.add_photo(
@@ -223,6 +277,37 @@ def do_db_photo(data_base_photo):
     data_base_photo.add_photo(
         r'encyclopedia_all_files/Encyclopedia_District/October_region/Photo/encyclopedia_october_guestion_10.jpg',
         'encyclopedia_october_guestion_10')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/October_region/Photo/encyclopedia_october_guestion_11.jpg',
+        'encyclopedia_october_guestion_11')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/October_region/Photo/encyclopedia_october_guestion_12.jpg',
+        'encyclopedia_october_guestion_12')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/October_region/Photo/encyclopedia_october_guestion_13.jpg',
+        'encyclopedia_october_guestion_13')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/October_region/Photo/encyclopedia_october_guestion_14.jpg',
+        'encyclopedia_october_guestion_14')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/October_region/Photo/encyclopedia_october_guestion_15.jpg',
+        'encyclopedia_october_guestion_15')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/October_region/Photo/encyclopedia_october_guestion_16.jpg',
+        'encyclopedia_october_guestion_16')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/October_region/Photo/encyclopedia_october_guestion_17.jpg',
+        'encyclopedia_october_guestion_17')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/October_region/Photo/encyclopedia_october_guestion_18.jpg',
+        'encyclopedia_october_guestion_18')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/October_region/Photo/encyclopedia_october_guestion_19.jpg',
+        'encyclopedia_october_guestion_19')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/October_region/Photo/encyclopedia_october_guestion_20.jpg',
+        'encyclopedia_october_guestion_20')
+
 
     # пролетарский район
     data_base_photo.add_photo(
@@ -276,6 +361,30 @@ def do_db_photo(data_base_photo):
     data_base_photo.add_photo(
         r'encyclopedia_all_files/Encyclopedia_District/Proletarian_region/Photo/encyclopedia_proletarian_guestion_17.jpg',
         'encyclopedia_proletarian_guestion_17')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Proletarian_region/Photo/encyclopedia_proletarian_guestion_18.jpg',
+        'encyclopedia_proletarian_guestion_18')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Proletarian_region/Photo/encyclopedia_proletarian_guestion_19.jpg',
+        'encyclopedia_proletarian_guestion_19')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Proletarian_region/Photo/encyclopedia_proletarian_guestion_20.jpg',
+        'encyclopedia_proletarian_guestion_20')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Proletarian_region/Photo/encyclopedia_proletarian_guestion_21.jpg',
+        'encyclopedia_proletarian_guestion_21')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Proletarian_region/Photo/encyclopedia_proletarian_guestion_22.jpg',
+        'encyclopedia_proletarian_guestion_22')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Proletarian_region/Photo/encyclopedia_proletarian_guestion_23.jpg',
+        'encyclopedia_proletarian_guestion_23')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Proletarian_region/Photo/encyclopedia_proletarian_guestion_24.jpg',
+        'encyclopedia_proletarian_guestion_24')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Proletarian_region/Photo/encyclopedia_proletarian_guestion_25.jpg',
+        'encyclopedia_proletarian_guestion_25')
 
     # железнодорожный район
     data_base_photo.add_photo(

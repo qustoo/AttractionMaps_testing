@@ -130,7 +130,8 @@ class Database:
         return (self.select_user(id=id))[7]
 
     def get_rating_total(self, id: int):
-        return (self.get_rating_easy(id)) + (self.get_rating_medium(id)) + (self.get_rating_hard(id))
+        x = self.select_user(id=id)
+        return x[5]+x[6]+x[7]
 
     def update_rating_easy(self, id: int, rating: float):
         sql = "UPDATE Users SET rating_easy=? WHERE id=?"
