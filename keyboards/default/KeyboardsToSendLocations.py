@@ -12,9 +12,9 @@ NextOrFinishProgressMap = CallbackData("ComingSoon", "next")
 SelectTypeAttractions = InlineKeyboardMarkup(row_width=3, inline_keyboard=[
     [
         InlineKeyboardButton(
-            text="Церковь|Храм",
+            text="Церковь|Храм|Собор",
             # callback_data="place:Church:2155"
-            callback_data=TypeObject.new(type_place="Church", name_place="Церковь|Храм", number_to_remove=0)
+            callback_data=TypeObject.new(type_place="Church", name_place="Церковь|Храм|Собор", number_to_remove=0)
         )
     ],
     [
@@ -28,29 +28,29 @@ SelectTypeAttractions = InlineKeyboardMarkup(row_width=3, inline_keyboard=[
     [
         InlineKeyboardButton
             (
-            text="Музей",
-            callback_data=TypeObject.new(type_place="Museum", name_place="Музей", number_to_remove=2)
+            text="Музей|Сквер",
+            callback_data=TypeObject.new(type_place="Museum", name_place="Музей|Сквер", number_to_remove=2)
         )
     ],
     [
         InlineKeyboardButton
             (
-            text="Дворец",
-            callback_data=TypeObject.new(type_place="Palace", name_place="Дворец", number_to_remove=3)
+            text="Дворец|Театр",
+            callback_data=TypeObject.new(type_place="Palace", name_place="Дворец|Театр", number_to_remove=3)
         )
     ],
     [
         InlineKeyboardButton
             (
-            text="Памятник",
-            callback_data=TypeObject.new(type_place="Monument", name_place="Памятник", number_to_remove=4)
+            text="Памятник|Мемориал",
+            callback_data=TypeObject.new(type_place="Monument", name_place="Памятник|Мемориал", number_to_remove=4)
         )
     ],
     [
         InlineKeyboardButton
             (
-            text="Парк",
-            callback_data=TypeObject.new(type_place="Park", name_place="Парк", number_to_remove=5)
+            text="Парк|Фонтан",
+            callback_data=TypeObject.new(type_place="Park", name_place="Парк|Фонтан", number_to_remove=5)
         )
     ],
     [
