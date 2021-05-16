@@ -184,7 +184,7 @@ async def finish_test(message: types.Message, state: FSMContext):
     for index in range(0, 10):
         if (Answer_List_Question[index] == Right_answers_med[index]):
             await message.answer(text=f'Вопрос {index + 1}:Правильный ответ!')
-            rate = db.get_rating_easy(message.from_user.id)
+            rate = db.get_rating_medium(message.from_user.id)
             db.update_rating_easy(id=message.from_user.id, rating=rate + 1.0)
         else:
             await message.answer(text=f'Вопрос {index + 1}:Неправильный ответ!')
