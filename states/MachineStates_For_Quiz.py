@@ -1,6 +1,10 @@
 from aiogram.dispatcher.filters.state import StatesGroup, State
 
 
+class YesOrNoFinishShowRating(StatesGroup):
+    Q1 = State()
+
+
 class QuizEasy(StatesGroup):
     Q1 = State()
     Q2 = State()
@@ -48,5 +52,3 @@ class QuizHard(StatesGroup):
     Q13 = State()
     Q14 = State()
     Q15 = State()
-
-
