@@ -310,7 +310,8 @@ async def next_place(call: CallbackQuery, callback_data: dict, state: FSMContext
     data = await state.get_data()
     user = db.select_user(id=call.from_user.id)
     # получаем координаты из БД
-    new_lat, new_lon = await db.get_coordinates(id=call.from_user.id)
+    # postgres : await db.get_coordinates(id=call.from_user.id)
+    new_lat, new_lon = db.get_coordinates(id=call.from_user.id)
     closes_places = choose_nearest(new_lat, new_lon, Attractions, name_object=data.get('lastLocations'))
     if not closes_places:
         await call.message.edit_text(text='Список мест для посещения закончилось!\n')
