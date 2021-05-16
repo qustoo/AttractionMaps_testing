@@ -1,7 +1,6 @@
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Command
 from aiogram.types import CallbackQuery
-from aiogram.utils.markdown import hbold, hitalic
 
 from handlers.users.Finally_Quiz.quizing_easy.quiz_easy_photo import photo_quiz
 from keyboards.inline.callback_datas import quiz_callback
@@ -21,13 +20,8 @@ async def enter_easy_test(message: types.Message):
     # присылаем фотку и клаву
     await message.answer_photo(photo=open(photo_db.get_one_file_name(name=photo_quiz[0]), 'rb'),
                                reply_markup=quiz_photo1)
-    await message.answer(text=hitalic("Вопрос 1:\n") + Easy_Array_Questions[0], reply_markup=quiz_keyboard1)
+    await message.answer(text="<b>Вопрос 1:</b>\n" + Easy_Array_Questions[0], reply_markup=quiz_keyboard1)
     await QuizEasy.Q1.set()
-
-    # @dp.callback_query_handler(quiz_photo_callback.filter(next="p1"),state=QuizEasy.Q1)
-    # async def question_1(call: CallbackQuery):
-    #     await call.answer(cache_time=60)
-    #     await call.message.edit_reply_markup(reply_markup=quiz_photo2)
 
 
 @dp.callback_query_handler(quiz_callback.filter(next="2"), state=QuizEasy.Q1)
@@ -36,7 +30,7 @@ async def question_1(call: CallbackQuery, state: FSMContext, callback_data: dict
 
     answer1 = callback_data.get('answer')
     await state.update_data(answer1=answer1)
-    await call.message.edit_text(text="Вопрос 2:\n" + Easy_Array_Questions[1], reply_markup=quiz_keyboard2)
+    await call.message.edit_text(text= "<b>Вопрос 2:</b>\n" + Easy_Array_Questions[1], reply_markup=quiz_keyboard2)
     # await call.message.answer_photo(photo=open(photo_db.get_one_file_name(name='easy_question_1'), 'rb'))
     await QuizEasy.Q2.set()
 
@@ -46,7 +40,7 @@ async def question_1(call: CallbackQuery, state: FSMContext, callback_data: dict
     await call.answer(cache_time=60)
     answer2 = callback_data.get('answer')
     await state.update_data(answer2=answer2)
-    await call.message.edit_text(text="Вопрос 3:\n" + Easy_Array_Questions[2], reply_markup=quiz_keyboard3)
+    await call.message.edit_text(text= "<b>Вопрос 3:</b>\n" + Easy_Array_Questions[2], reply_markup=quiz_keyboard3)
     await QuizEasy.Q3.set()
 
 
@@ -55,7 +49,7 @@ async def question_1(call: CallbackQuery, state: FSMContext, callback_data: dict
     await call.answer(cache_time=60)
     answer3 = callback_data.get('answer')
     await state.update_data(answer3=answer3)
-    await call.message.edit_text(text="Вопрос 4:\n" + Easy_Array_Questions[3], reply_markup=quiz_keyboard4)
+    await call.message.edit_text(text= "<b>Вопрос 4:</b>\n" + Easy_Array_Questions[3], reply_markup=quiz_keyboard4)
     await QuizEasy.Q4.set()
 
 
@@ -64,7 +58,7 @@ async def question_1(call: CallbackQuery, state: FSMContext, callback_data: dict
     await call.answer(cache_time=60)
     answer4 = callback_data.get('answer')
     await state.update_data(answer4=answer4)
-    await call.message.edit_text(text="Вопрос 5:\n" + Easy_Array_Questions[4], reply_markup=quiz_keyboard5)
+    await call.message.edit_text(text= "<b>Вопрос 5:</b>\n" + Easy_Array_Questions[4], reply_markup=quiz_keyboard5)
     await QuizEasy.Q5.set()
 
 
@@ -73,7 +67,7 @@ async def question_1(call: CallbackQuery, state: FSMContext, callback_data: dict
     await call.answer(cache_time=60)
     answer5 = callback_data.get('answer')
     await state.update_data(answer5=answer5)
-    await call.message.edit_text(text="Вопрос 6:\n" + Easy_Array_Questions[5], reply_markup=quiz_keyboard6)
+    await call.message.edit_text(text= "<b>Вопрос 6:</b>\n" + Easy_Array_Questions[5], reply_markup=quiz_keyboard6)
     await QuizEasy.Q6.set()
 
 
@@ -82,7 +76,7 @@ async def question_1(call: CallbackQuery, state: FSMContext, callback_data: dict
     await call.answer(cache_time=60)
     answer6 = callback_data.get('answer')
     await state.update_data(answer6=answer6)
-    await call.message.edit_text(text="Вопрос 7:\n" + Easy_Array_Questions[6], reply_markup=quiz_keyboard7)
+    await call.message.edit_text(text= "<b>Вопрос 7:</b>\n" + Easy_Array_Questions[6], reply_markup=quiz_keyboard7)
     await QuizEasy.Q7.set()
 
 
@@ -91,7 +85,7 @@ async def question_1(call: CallbackQuery, state: FSMContext, callback_data: dict
     await call.answer(cache_time=60)
     answer7 = callback_data.get('answer')
     await state.update_data(answer7=answer7)
-    await call.message.edit_text(text="Вопрос 8:\n" + Easy_Array_Questions[7], reply_markup=quiz_keyboard8)
+    await call.message.edit_text(text= "<b>Вопрос 8:</b>\n" + Easy_Array_Questions[7], reply_markup=quiz_keyboard8)
     await QuizEasy.Q8.set()
 
 
@@ -100,7 +94,7 @@ async def question_1(call: CallbackQuery, state: FSMContext, callback_data: dict
     await call.answer(cache_time=60)
     answer8 = callback_data.get('answer')
     await state.update_data(answer8=answer8)
-    await call.message.edit_text(text="Вопрос 9:\n" + Easy_Array_Questions[8], reply_markup=quiz_keyboard9)
+    await call.message.edit_text(text= "<b>Вопрос 9:</b>\n" + Easy_Array_Questions[8], reply_markup=quiz_keyboard9)
     await QuizEasy.Q9.set()
 
 
@@ -109,7 +103,7 @@ async def question_1(call: CallbackQuery, state: FSMContext, callback_data: dict
     await call.answer(cache_time=60)
     answer9 = callback_data.get('answer')
     await state.update_data(answer9=answer9)
-    await call.message.edit_text(text="Вопрос 10:\n" + Easy_Array_Questions[9], reply_markup=quiz_keyboard10)
+    await call.message.edit_text(text= "<b>Вопрос 10:</b>\n" + Easy_Array_Questions[9], reply_markup=quiz_keyboard10)
     await QuizEasy.Q10.set()
 
 
@@ -139,6 +133,7 @@ async def cancel_quiz(call: CallbackQuery):
     # Отправляем пустую клавиатуру, т.е. выходит из клавиатуры
     await QuizEasy.Q11.set()
     await call.message.edit_reply_markup(reply_markup=None)
+
 
 
 Right_Answer_List_Question_Easy = [
