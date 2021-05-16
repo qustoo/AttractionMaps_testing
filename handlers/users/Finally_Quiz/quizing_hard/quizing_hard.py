@@ -66,7 +66,7 @@ async def answer_test_1(message: types.Message, state: FSMContext):
     # отправляем новую фотку + вопрос
     await message.answer_photo(photo=open(photo_db.get_one_file_name(name='hard_question_2'), 'rb'))
     await message.answer("Вопрос 2:\n" + Hard_Array_Questions[1])
-    await QuizHard.Q15.set()
+    await QuizHard.Q2.set()
 
 
 @dp.message_handler(state=QuizHard.Q2)
