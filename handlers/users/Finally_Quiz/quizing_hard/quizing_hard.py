@@ -262,8 +262,10 @@ async def check_answers_finish(message: types.Message, state: FSMContext):
     for i in range(0, len(ListAnswersFromUserHardLevel)):
         if re.search(ListPatternsRegexHardLevel[i], str(ListAnswersFromUserHardLevel[i]), re.IGNORECASE) is not None:
             result_str += hbold(f'Вопрос {i + 1}') + hbold(' - Правильный ответ!') + "\n\n"
-            rate = await db.get_rating_hard(id=message.from_user.id, name=message.from_user.full_name)
-            await db.update_rating_hard(id=message.from_user.id, rating=rate + 6.0)
+            # postgresql : rate = await db.get_rating_hard(id=message.from_user.id, name=message.from_user.full_name)
+            rate = db.get_rating_hard(id=message.from_user.id, name=message.from_user.full_name)
+            # postgresql :  await db.update_rating_hard(id=message.from_user.id, rating=rate + 6.0)
+            db.update_rating_hard(id=message.from_user.id, rating=rate + 6.0)
         else:
             result_str += hitalic(f'Вопрос {i + 1}') + hbold(' - Неправильный ответ!\n') + hitalic(
                 f'Корректным ответом будет: \n') + hbold(f'{ListCorrectAnswersHardLevel[i]}') + "\n\n"

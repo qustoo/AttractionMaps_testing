@@ -201,8 +201,10 @@ async def finish_test(message: types.Message, state: FSMContext):
     for index in range(0, 10):
         if Answer_List_Question[index] == CorrectAnswersMediumQuiz[index]:
             result_str += hbold(f'Вопрос {index + 1}') + hbold(' - Правильный ответ!') + "\n\n"
-            rate = await db.get_rating_medium(id=message.from_user.id)
-            await db.update_rating_medium(id=message.from_user.id, rating=rate + 3.0)
+            # postgres :  await db.get_rating_medium(id=message.from_user.id)
+            rate = db.get_rating_medium(id=message.from_user.id)
+            # postgres :   await db.update_rating_medium(id=message.from_user.id, rating=rate + 3.0)
+            db.update_rating_medium(id=message.from_user.id, rating=rate + 3.0)
         else:
             result_str += hitalic(f'Вопрос {index + 1}') + hbold(' - Неправильный ответ!\n') + hitalic(
                 f'Корректным ответом будет: \n') + hbold(f'{CorrectAnswersMediumQuiz[index]}') + "\n\n"

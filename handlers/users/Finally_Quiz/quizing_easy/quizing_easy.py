@@ -179,8 +179,10 @@ async def finish_test(message: types.Message, state: FSMContext):
     for index in range(0, 10):
         if Answer_List_Question_Easy[index] == Right_Answer_List_Question_Easy[index]:
             result_str += hbold(f'Вопрос {index + 1}') + hbold(' - Правильный ответ!') + "\n\n"
-            rate = await db.get_rating_easy(id=message.from_user.id)
-            await db.update_rating_easy(id=message.from_user.id, rating=rate + 1.0)
+            # postgres :  await db.get_rating_easy(id=message.from_user.id)
+            rate = db.get_rating_easy(id=message.from_user.id)
+            # postgres : await db.update_rating_easy(id=message.from_user.id, rating=rate + 1.0)
+            db.update_rating_easy(id=message.from_user.id, rating=rate + 1.0)
         else:
             result_str += hitalic(f'Вопрос {index + 1}') + hbold(' - Неправильный ответ!\n') + hitalic(
                 f'Корректным ответом будет: \n') + hbold(f'{Right_Answer_List_Question_Easy[index]}') + "\n\n"
