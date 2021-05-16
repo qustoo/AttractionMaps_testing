@@ -40,7 +40,7 @@ inline_keyboard=[
                 callback_data=quiz_callback.new(next="3m",answer="3")),
 ],[InlineKeyboardButton(
                 text="Перт Алексеевич",
-                callback_data=quiz_callback.new(next="3m",answer="Петр")),
+                callback_data=quiz_callback.new(next="3m",answer="Перт Алексеевич")),
 ],[InlineKeyboardButton(
                 text="Николай Павлович",
                 callback_data=quiz_callback.new(next="3m",answer="5")),
@@ -53,20 +53,20 @@ inline_keyboard=[
 medium_keyboard3 = InlineKeyboardMarkup(
 inline_keyboard=[
 [InlineKeyboardButton(
-                text="Ростовский областной музей краеведения",
+                text="Конституционный",
                 callback_data=quiz_callback.new(next="4m",answer="1")),
 ],[InlineKeyboardButton(
-                text="Ростовский областной суд",
+                text="Ростовский областной",
                 callback_data=quiz_callback.new(next="4m",answer="2")),
 ],
 [InlineKeyboardButton(
-                text="Художественная Галерея 'Ростов'",
+                text="Четырнадцатый арбитражный апелляционный",
                 callback_data=quiz_callback.new(next="4m",answer="3")),
 ],[InlineKeyboardButton(
-                text="Пятнадцатый арбитражный апелляционный суд",
-                callback_data=quiz_callback.new(next="4m",answer="Суд")),
+                text="Пятнадцатый арбитражный апелляционный",
+                callback_data=quiz_callback.new(next="4m",answer="15 арбитражный апелляционный")),
 ],[InlineKeyboardButton(
-                text="Музейная экспозиция в Управлении ФССП России по РО",
+                text="Верховный",
                 callback_data=quiz_callback.new(next="4m",answer="5")),
 ],[InlineKeyboardButton
                 (
@@ -85,7 +85,7 @@ inline_keyboard=[
 ],
 [InlineKeyboardButton(
                 text="12 стульев",
-                callback_data=quiz_callback.new(next="5m",answer="Стулья")),
+                callback_data=quiz_callback.new(next="5m",answer="12 стульев")),
 ],[InlineKeyboardButton(
                 text="Война и мир",
                 callback_data=quiz_callback.new(next="5m",answer="4")),
@@ -115,7 +115,7 @@ inline_keyboard=[
                 callback_data=quiz_callback.new(next="6m",answer="4")),
 ],[InlineKeyboardButton(
                 text="Городская дума",
-                callback_data=quiz_callback.new(next="6m",answer="Дума")),
+                callback_data=quiz_callback.new(next="6m",answer="Городская дума")),
 ],[InlineKeyboardButton
                 (
                 text="Выйти из викторины",
@@ -187,7 +187,7 @@ inline_keyboard=[
                 callback_data=quiz_callback.new(next="9m",answer="4")),
 ],[InlineKeyboardButton(
                 text="Карл Густав Юнг",
-                callback_data=quiz_callback.new(next="9m",answer="Юнг")),
+                callback_data=quiz_callback.new(next="9m",answer="Карл Густав Юнг")),
 ],[InlineKeyboardButton
                 (
                 text="Выйти из викторины",
@@ -205,7 +205,7 @@ inline_keyboard=[
 ],
 [InlineKeyboardButton(
                 text="Американский Мост",
-                callback_data=quiz_callback.new(next="10m",answer="Мост")),
+                callback_data=quiz_callback.new(next="10m",answer="Американский Мост")),
 ],[InlineKeyboardButton(
                 text="Новый мост",
                 callback_data=quiz_callback.new(next="10m",answer="4")),
@@ -315,7 +315,7 @@ inline_keyboard=[
         ]]
 )
 
-CorrectAnswersMediumQuiz=["Одну","Петр","Суд","Стулья","Дума","1941","Врангель","Юнг","Мост","1911","Необарокко","1901","1914"]
+CorrectAnswersMediumQuiz=["Одну","Перт Алексеевич","15 арбитражный апелляционный","12 стульев","Городская дума","1941","Врангель","Карл Густав Юнг","Американский Мост","1911","Необарокко","1901","1914"]
 
 
 

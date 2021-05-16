@@ -479,6 +479,34 @@ def do_db_photo(data_base_photo):
     data_base_photo.add_photo(
         r'encyclopedia_all_files/Encyclopedia_District/Soviet_region/Photo/encyclopedia_guestion_10.jpg',
         'encyclopedia_guestion_10')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Soviet_region/Photo/encyclopedia_guestion_11.jpg',
+        'encyclopedia_guestion_11')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Soviet_region/Photo/encyclopedia_guestion_12.jpg',
+        'encyclopedia_guestion_12')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Soviet_region/Photo/encyclopedia_guestion_13.jpg',
+        'encyclopedia_guestion_13')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Soviet_region/Photo/encyclopedia_guestion_14.jpg',
+        'encyclopedia_guestion_14')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Soviet_region/Photo/encyclopedia_guestion_15.jpg',
+        'encyclopedia_guestion_15')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Soviet_region/Photo/encyclopedia_guestion_16.jpg',
+        'encyclopedia_guestion_16')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Soviet_region/Photo/encyclopedia_guestion_17.jpg',
+        'encyclopedia_guestion_17')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Soviet_region/Photo/encyclopedia_guestion_18.jpg',
+        'encyclopedia_guestion_18')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Soviet_region/Photo/encyclopedia_guestion_19.jpg',
+        'encyclopedia_guestion_19')
+
 
     # ворошиловский район
     data_base_photo.add_photo(
@@ -499,6 +527,36 @@ def do_db_photo(data_base_photo):
     data_base_photo.add_photo(
         r'encyclopedia_all_files/Encyclopedia_District/Voroshilovsky_region/Photo/encyclopedia_voroshilovsky_guestion_6.jpg',
         'encyclopedia_voroshilovsky_guestion_6')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Voroshilovsky_region/Photo/encyclopedia_voroshilovsky_guestion_7.jpg',
+        'encyclopedia_voroshilovsky_guestion_7')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Voroshilovsky_region/Photo/encyclopedia_voroshilovsky_guestion_8.jpg',
+        'encyclopedia_voroshilovsky_guestion_8')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Voroshilovsky_region/Photo/encyclopedia_voroshilovsky_guestion_9.jpg',
+        'encyclopedia_voroshilovsky_guestion_9')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Voroshilovsky_region/Photo/encyclopedia_voroshilovsky_guestion_10.jpg',
+        'encyclopedia_voroshilovsky_guestion_10')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Voroshilovsky_region/Photo/encyclopedia_voroshilovsky_guestion_11.jpg',
+        'encyclopedia_voroshilovsky_guestion_11')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Voroshilovsky_region/Photo/encyclopedia_voroshilovsky_guestion_12.jpg',
+        'encyclopedia_voroshilovsky_guestion_12')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Voroshilovsky_region/Photo/encyclopedia_voroshilovsky_guestion_13.jpg',
+        'encyclopedia_voroshilovsky_guestion_13')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Voroshilovsky_region/Photo/encyclopedia_voroshilovsky_guestion_14.jpg',
+        'encyclopedia_voroshilovsky_guestion_14')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Voroshilovsky_region/Photo/encyclopedia_voroshilovsky_guestion_15.jpg',
+        'encyclopedia_voroshilovsky_guestion_15')
+    data_base_photo.add_photo(
+        r'encyclopedia_all_files/Encyclopedia_District/Voroshilovsky_region/Photo/encyclopedia_voroshilovsky_guestion_16.jpg',
+        'encyclopedia_voroshilovsky_guestion_16')
 
     return
 
