@@ -13,7 +13,7 @@ from aiogram import types
 
 from states.MachineStates_For_Quiz import QuizMedium
 
-user_answers = []
+user_answers = {}
 
 
 @dp.message_handler(Command("quiz_medium"), state=None)
