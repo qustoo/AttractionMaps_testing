@@ -10,6 +10,15 @@ photo_quiz=['easy_question_1','easy_question_2','easy_question_3','easy_question
 
 @dp.callback_query_handler(quiz_photo_callback.filter(next="p1"),state=QuizEasy.Q1)
 @dp.callback_query_handler(quiz_photo_callback.filter(next="p1"),state=QuizEasy.Q2)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p1"),state=QuizEasy.Q3)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p1"),state=QuizEasy.Q4)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p1"),state=QuizEasy.Q5)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p1"),state=QuizEasy.Q6)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p1"),state=QuizEasy.Q7)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p1"),state=QuizEasy.Q8)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p1"),state=QuizEasy.Q9)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p1"),state=QuizEasy.Q10)
+
 async def question_1(call: CallbackQuery):
     await call.answer(cache_time=60)
     await call.message.edit_media(media=InputMediaPhoto(media=open(photo_db.get_one_file_name(name=photo_quiz[1]), 'rb')),reply_markup=quiz_photo2)
@@ -17,6 +26,13 @@ async def question_1(call: CallbackQuery):
 # 2
 @dp.callback_query_handler(quiz_photo_callback.filter(next="p2"),state=QuizEasy.Q2)
 @dp.callback_query_handler(quiz_photo_callback.filter(next="p2"),state=QuizEasy.Q3)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p2"),state=QuizEasy.Q4)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p2"),state=QuizEasy.Q5)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p2"),state=QuizEasy.Q6)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p2"),state=QuizEasy.Q7)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p2"),state=QuizEasy.Q8)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p2"),state=QuizEasy.Q9)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p2"),state=QuizEasy.Q10)
 async def question_1(call: CallbackQuery):
     await call.answer(cache_time=60)
     await call.message.edit_media(media=InputMediaPhoto(media=open(photo_db.get_one_file_name(name=photo_quiz[2]), 'rb')),reply_markup=quiz_photo3)
@@ -24,6 +40,12 @@ async def question_1(call: CallbackQuery):
 # 3
 @dp.callback_query_handler(quiz_photo_callback.filter(next="p3"),state=QuizEasy.Q3)
 @dp.callback_query_handler(quiz_photo_callback.filter(next="p3"),state=QuizEasy.Q4)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p3"),state=QuizEasy.Q5)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p3"),state=QuizEasy.Q6)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p3"),state=QuizEasy.Q7)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p3"),state=QuizEasy.Q8)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p3"),state=QuizEasy.Q9)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p3"),state=QuizEasy.Q10)
 async def question_1(call: CallbackQuery):
     await call.answer(cache_time=60)
     await call.message.edit_media(media=InputMediaPhoto(media=open(photo_db.get_one_file_name(name=photo_quiz[3]), 'rb')),reply_markup=quiz_photo4)
@@ -32,6 +54,11 @@ async def question_1(call: CallbackQuery):
 # 4
 @dp.callback_query_handler(quiz_photo_callback.filter(next="p4"),state=QuizEasy.Q4)
 @dp.callback_query_handler(quiz_photo_callback.filter(next="p4"),state=QuizEasy.Q5)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p4"),state=QuizEasy.Q6)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p4"),state=QuizEasy.Q7)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p4"),state=QuizEasy.Q8)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p4"),state=QuizEasy.Q9)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p4"),state=QuizEasy.Q10)
 async def question_1(call: CallbackQuery):
     await call.answer(cache_time=60)
     await call.message.edit_media(media=InputMediaPhoto(media=open(photo_db.get_one_file_name(name=photo_quiz[4]), 'rb')),reply_markup=quiz_photo5)
@@ -40,6 +67,10 @@ async def question_1(call: CallbackQuery):
 # 5
 @dp.callback_query_handler(quiz_photo_callback.filter(next="p5"),state=QuizEasy.Q5)
 @dp.callback_query_handler(quiz_photo_callback.filter(next="p5"),state=QuizEasy.Q6)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p5"),state=QuizEasy.Q7)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p5"),state=QuizEasy.Q8)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p5"),state=QuizEasy.Q9)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p5"),state=QuizEasy.Q10)
 async def question_1(call: CallbackQuery):
     await call.answer(cache_time=60)
     await call.message.edit_media(media=InputMediaPhoto(media=open(photo_db.get_one_file_name(name=photo_quiz[5]), 'rb')),reply_markup=quiz_photo6)
@@ -48,6 +79,9 @@ async def question_1(call: CallbackQuery):
 # 6
 @dp.callback_query_handler(quiz_photo_callback.filter(next="p6"),state=QuizEasy.Q6)
 @dp.callback_query_handler(quiz_photo_callback.filter(next="p6"),state=QuizEasy.Q7)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p6"),state=QuizEasy.Q8)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p6"),state=QuizEasy.Q9)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p6"),state=QuizEasy.Q10)
 async def question_1(call: CallbackQuery):
     await call.answer(cache_time=60)
     await call.message.edit_media(media=InputMediaPhoto(media=open(photo_db.get_one_file_name(name=photo_quiz[6]), 'rb')),reply_markup=quiz_photo7)
@@ -56,6 +90,8 @@ async def question_1(call: CallbackQuery):
 # 7
 @dp.callback_query_handler(quiz_photo_callback.filter(next="p7"),state=QuizEasy.Q7)
 @dp.callback_query_handler(quiz_photo_callback.filter(next="p7"),state=QuizEasy.Q8)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p7"),state=QuizEasy.Q9)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p7"),state=QuizEasy.Q10)
 async def question_1(call: CallbackQuery):
     await call.answer(cache_time=60)
     await call.message.edit_media(media=InputMediaPhoto(media=open(photo_db.get_one_file_name(name=photo_quiz[7]), 'rb')),reply_markup=quiz_photo8)
@@ -64,6 +100,7 @@ async def question_1(call: CallbackQuery):
 # 8
 @dp.callback_query_handler(quiz_photo_callback.filter(next="p8"),state=QuizEasy.Q8)
 @dp.callback_query_handler(quiz_photo_callback.filter(next="p8"),state=QuizEasy.Q9)
+@dp.callback_query_handler(quiz_photo_callback.filter(next="p8"),state=QuizEasy.Q10)
 async def question_1(call: CallbackQuery):
     await call.answer(cache_time=60)
     await call.message.edit_media(media=InputMediaPhoto(media=open(photo_db.get_one_file_name(name=photo_quiz[8]), 'rb')),reply_markup=quiz_photo9)

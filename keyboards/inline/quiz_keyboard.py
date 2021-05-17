@@ -122,7 +122,7 @@ quiz_keyboard7 = InlineKeyboardMarkup(
             callback_data=quiz_callback.new(next="8", answer="был управляющим города")),
         ], [InlineKeyboardButton(
             text="был владельцем спиртоводочного завода",
-            callback_data=quiz_callback.new(next="8", answer="был владельцем сз")),
+            callback_data=quiz_callback.new(next="8", answer="был владельцем спирт .завода")),
         ], [InlineKeyboardButton
             (
             text="Выйти из викторины",
