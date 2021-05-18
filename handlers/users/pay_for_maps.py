@@ -3,14 +3,20 @@ from random import randint
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Command
+from aiogram.dispatcher.filters.state import StatesGroup, State
 from aiogram.types import CallbackQuery, ReplyKeyboardRemove
 from aiogram.utils.markdown import hlink, hcode
 
 from data.Maps import Maps
 from data.config import WALLET_QIWI
+from keyboards.default.BuyMapSelectKeyboard import SelectDistrictSovietKirosvky
 from keyboards.inline.purchase_maps import buy_keyboard, paid_keyboard
 from loader import dp
 from utils.misc.qiwi import PaymentForQiwi, NoPaymentFound, NotEnoughMoney
+
+
+class ChoiceAMapDistrict(StatesGroup):
+    Q1 = State()
 
 
 @dp.message_handler(Command("buy_map"))
@@ -78,14 +84,34 @@ async def cancel_payment(call: CallbackQuery, state: FSMContext):
         await call.message.answer("Не хватает средств!")
         return
     else:
-        await call.message.answer("Все успешно оплачено!")
-        rand_item = randint(1, 2)
-        if rand_item == 1:
-            await call.message.answer_document(types.InputFile("data/Rostov-na-donu.png"),
-                                               caption="Вот ваша секретная покупка!")
-        else:
-            await call.message.answer_document(types.InputFile("data/Rostov-na-donu_1.png"),
-                                               caption="Вот ваша секретная покупка!")
-        await state.set_state("choose a product")
-    await call.message.delete_reply_markup()
+        await call.message.answer("Все успешно оплачено!\nВыберите район:", reply_markup=SelectDistrictSovietKirosvky)
+        await ChoiceAMapDistrict.Q1.set()
+
+        # rand_item = randint(1, 2)
+        # if rand_item == 1:
+        #     await call.message.answer_document(types.InputFile("data/Rostov-na-donu.png"),
+        #                                        caption="Вот ваша секретная покупка!")
+        # else:
+        #     await call.message.answer_document(types.InputFile("data/Rostov-na-donu_1.png"),
+        #                                        caption="Вот ваша секретная покупка!")
+        # await state.set_state("choose a product")
+        await call.message.delete_reply_markup()
+
+
+@dp.message_handler(text="Советский", state=ChoiceAMapDistrict.Q1)
+async def exit_locations(message: types.Message, state: FSMContext):
+    await message.answer("Cпасибо за покупку", reply_markup=ReplyKeyboardRemove())
+    await message.answer_document(types.InputFile("data/Rostov-na-donu_1.png"),
+                                  caption="Вот ваша секретная покупка!")
     await state.finish()
+
+
+@dp.message_handler(text="Кировский", state=ChoiceAMapDistrict.Q1)
+async def exit_locations(message: types.Message, state: FSMContext):
+    await message.answer("Cпасибо за покупку", reply_markup=ReplyKeyboardRemove())
+    await message.answer_document(types.InputFile("data/Rostov-na-donu.png"),
+                                  caption="Вот ваша секретная покупка!")
+    await state.finish()
+
+# await call.message.delete_reply_markup()
+# await state.finish()
