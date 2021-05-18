@@ -13,7 +13,6 @@ async def get_my_rating(message: types.Message):
 @dp.message_handler(Command("get_rating"))
 async def view_rating_user(message: types.Message):
     users = db.select_all_users()
-    print(len(users))
     tmp_user_rating = {}
     for i in users:
         tmp_user_rating[i[1]] = db.get_rating_total(i[0])
@@ -23,10 +22,8 @@ async def view_rating_user(message: types.Message):
         sorted_user_rating[w] = tmp_user_rating[w]
 
     output_string = ""
-    counter = 0
+    index = 1
     for user in sorted_user_rating:
-        if counter < 20:
-            output_string += "Рейтинг пользователя " + user + ": " + str(sorted_user_rating[user]) + str("\n")
-        counter += 1
-    await message.answer(output_string)
-
+        output_string += str(index) + ': ' + user + " - " + str(sorted_user_rating[user]) + str("\n")
+        index += 1
+    await message.answer(text="Топ пользователей:\n" + output_string)
